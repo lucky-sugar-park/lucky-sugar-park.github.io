@@ -20,9 +20,9 @@ I have other two git account as belows
   - [My second git acccount](https://github.com/wondermelon4ever)
 
 I have certificates related to software development, architecture, cloud.  
-You can find it at **[Linkinin](https://www.linkedin.com/in/insoo-park)**
+You can find it at **[Linkinin](https://www.linkedin.com/in/insoo-park)**  
 
-I'm very interested in solving software problem using software algorithm and I have a badge 
+I'm very interested in solving software problem using software algorithm and I have a badge   
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=ispark)](https://solved.ac/ispark/)  
 
 I love to design and develop architecture (techinical, software or infrastructure). 
