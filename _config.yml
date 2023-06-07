@@ -62,6 +62,9 @@ author:
   avatar : "/assets/images/bio-photo.jpg"
   bio    : "I'm experienced an system architect and software developer"
   links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:lucky.sugar.park@gmail.com"
     - label: "linkedin"
       icon: "fas fa-fw fa-link"
       url: "https://www.linkedin.com/in/insoo-park"
