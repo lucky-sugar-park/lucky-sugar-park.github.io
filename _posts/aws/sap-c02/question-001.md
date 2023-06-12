@@ -33,5 +33,11 @@ D. Associate the private hosted zone to the shared services VPC. Create a Route 
 <details>
   <summary>정답</summary>
   A<br/>
-  Transit gateway를 통해서 On premise 네트워크와 VPC 네트워크들을 연결하는 것이 가장 효과적인 방법이고, On premise의 DNS와 Rout 53을 연결함으로써 On premise내의 서버들이 VPC 내의 도메인에 접근할 수 있고 반대로 VPC 내의 서버들이 On premise 내의 서버자원에 도메인 기반으로 접근할 수 있다.  
+  Transit gateway를 통해서 On premise 네트워크와 VPC 네트워크들을 연결하는 것이 가장 효과적인 방법이고, On premise의 DNS Resover에서 Rout 53의 Inbound로 forwaring하도록 Rule을 설정함으로써 On premise내의 서버들이 VPC 내의 도메인에 접근할 수 있다.  
+  <br/>
+  B의 경우에는 가능한 방법일 수는 있지만, Amazon의 Route 53을 경유하지 않는다  
+  <br/>
+  C는 Route 53의 Inbound와 Outbound가 뒤바뀐 것 같음.
+  <br/>
+  D는 private hosted zone만 Shared service VPC에 연결하는 것이 잘못 되었음  
 </deatils>
