@@ -48,3 +48,7 @@ VPC Peering 방식은 VPC당 125개까지 연결이 가능하고 Transit Gateway
 **대역폭**
 VPC Peering: 대역폭 제한이 없음  
 Transit Gateway:  최대 대역폭이 50Gbps로 제한이 있음
+
+<br/><br/>
+** 아래 주소의 글을 참조 했습니다 **  
+[https://yoo11052.tistory.com/170]https://yoo11052.tistory.com/170
