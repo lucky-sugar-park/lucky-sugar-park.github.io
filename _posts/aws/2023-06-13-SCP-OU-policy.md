@@ -17,6 +17,9 @@ tags:
 위의 그림은 AWS Organization에서 OU를 생성한 뒤에 OU에 만제 SCP를 적용한 후 AWS 계정들을 OU에 포함시키고 IAM 사용자들의 정책을 적용시킨 것을 나타낸다.  
 AWS Organization - OU(s) - AWS. 사용자와 같은 구조가 되는 것이다.  
 
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/72058fe1-d3ed-4fb4-adc4-2a9c23d94ef7)
+
+
 ### SCP (Service Control Policy)
 - SCP는 OU 또는 AWS 계정을 대상으로 적용가능
 - SCP는 하위 OU들에게 상속됨  
