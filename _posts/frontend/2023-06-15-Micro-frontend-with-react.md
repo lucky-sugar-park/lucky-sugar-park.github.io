@@ -127,3 +127,82 @@ React, JavaScript, Tailwind를 선택한다. ```home```이라 불리는 React �
 
 최종적으로 어플리케이션을 테스트하기 위해서 ```yarn install``` 명령어로 종속 라이브러리를 설치하고 ```yarn start``` 명령어로 ```dev-server```를 시작한다. 모든 것이 성공적으로 완료되면 다음의 그림이 보여야 한다.  
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/a38277e2-9497-45fe-b561-9dd58fe4e8f3)
+
+## 마이크로 프론트엔드 구현하기 
+```home``` 어플리케이션은 ```Header```와 ```Footer```라는 두개의 컴포넌트를 포함하고 있다. ```about``` 어플리케이션은 이런 컴포너트들을 import 한후에 소비한다.  
+
+이것을 구현하기 위해서는 ```home```의 ```src``` 디렉토리에서 두 개의 컴포넌트를 만든다 (```Header.jsx```와 ```Footer.jsx```)  다음의 코드를 각각 ```Header.jsx```와 ```Footer.jsx```에 붙여 넣는다.  
+```
+import React from "react"
+export default function Header() {
+    return (
+        <div className="p-5 bg-blue-500 text-white -text-3xl font-bold">
+            Micro Frontend Header
+        </div>
+    )
+}
+```
+<br/>
+```
+import React from "react"
+export default function Footer() {
+    return (
+        <div className="p-5 bg-blue-500 text-white -text-3xl font-bold">
+            Micro Frontend Footer
+        </div>
+    )
+}
+```
+
+다음으로 ```App.jsx``` 컴포넌트를 다음의 navbars를 사용하도록 업데이트 한다.  
+```
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import Header from "./Header"
+import Footer from "./Footer";
+
+const App = () => (
+  <div className="text-3xl mx-auto max-w-6xl">
+    <Header />
+    <div className="my-10">
+      Home page Content
+    </div>
+    <Footer />
+  </div>
+);
+
+ReactDOM.render(<App />, document.getElementById("app"));
+```  
+
+서버를 재구동하여 어플리케이션을 테스트 한다. 다음의 화면이 보여야 한다.  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/c1dd6dd4-a152-465f-8654-572345dd188a)
+
+다음으로 ```about``` 어플리케이션아넹 있는 ```about```페이지를 빌드해야 한다. 그렇게 하기 위해서는 ```about```어플리케이션의 ```App.jsx``` 컴포넌트를 다음과 같이 수정한다.  
+```
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+const App = () => (
+  <div className="text-3xl mx-auto max-w-6xl">
+    <div class="text-center">
+      <img
+        src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
+        class="rounded-full w-32 mb-4 mx-auto"
+        alt="Avatar"
+      />
+      <h5 class="text-xl font-medium leading-tight mb-2">John Doe</h5>
+      <p class="text-gray-500">Web designer</p>
+    </div>
+  </div>
+);
+
+ReactDOM.render(<App />, document.getElementById("app"));
+```  
+
+```dev-server```를 다시 구동하면 다음의 그림이 보인다.   
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/58d443a3-fd4a-4d30-bdad-cb48f6681899)  
+
+위의 UI에서 header와 footer navigation이 필요한 것을 알 수 있다. 그러나 우리는 마이크로 프론트엔드를 통해 그것들을 공유할 수 있기 때문에 코드를 복사해서 생성할 필요는 없다.  
+
+## 모듈 추가하기 
