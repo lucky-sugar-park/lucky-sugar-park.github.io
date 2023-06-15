@@ -206,3 +206,69 @@ ReactDOM.render(<App />, document.getElementById("app"));
 위의 UI에서 header와 footer navigation이 필요한 것을 알 수 있다. 그러나 우리는 마이크로 프론트엔드를 통해 그것들을 공유할 수 있기 때문에 코드를 복사해서 생성할 필요는 없다.  
 
 ## 모듈 추가하기 
+위에서 ```about```어플리케이션내의 ```about```페이지가 (홈 어플리케이션의 컴포넌트인) ```Header```와 ```Footer``` 컴포넌트를 소비하는 것이 필요하다고 언급하였다.  이렇게 하기 위해서는 모듈을 추가할 필요가 있다.  
+<br/>
+```home``` 어플리케이션의 ```Header```와 ```Footer``` 컴포넌트를 마이크로 프론트엔드로 변경해서 다른 어플리케이션의 컴포넌트들이 사용할 수 있도록 변경할 것이다.  
+
+```home``` 어플리케이션의 ```webpack.config.js``` 파일을 연다 (```create-mf-app``` 패키지에 의해서 이미 생성 및 구성된 상태임) 첫번째로 ```ModuleFederationPlugin``` 구성내의 ```expose``` 속성을 아래의 내용으로 수정한다.  
+
+```
+exposes: {
+        "./Header": "./src/Header.jsx",
+        "./Footer": "./src/Footer.jsx"
+      },
+```  
+
+위의 코드에서, ```home```  어플리케이션이 ```Header```와 ```Footer``` 컴포넌트를 마이크로 프론트엔드로 노출하도록 명시하였다.  결론적으로 이 컴폰넌트들은 공유될 수 있다.  
+
+이제 서버를 재시작한다. UI상으로는 아무 것도 안 변했지만, 하나의 원격 엔트리 파일이 hood 아래에서 생성되었다. 원격 엔트리 파일을 보기 위해서는 웹 브라우저에서 ```localhost:3000/remoteEntry.js```를 입력한다. 아래의 그림처럼 보인다.  
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/4f873ca8-6722-489f-8417-3b3bddbb6311)  
+
+이 원격 엔트리 파일 (```remoteEntry.js```)은 ```home``` 어플리케이션에 의해서 노출되어지는 모든 모듈들의 manifest 파일이다.  
+
+설정을 완료하기 위해서, manifest  파일의 링크 (```localhost:3000/remoteEntry.js```)를 복하한 후에 ```webpack.config.js``` 파일의 ```ModuleFederationPlugin``` 설정에서 ```remotes``` 속성을 아래처럼 수정한다.  
+```
+remotes: {
+        home: "home@http://localhost:3000/remoteEntry.js",
+      },
+```  
+
+위의 코드는 ```about``` 컴포넌트가 ```home```이라는 원격 마이크로 프론트엔드 컴포넌트를 가지고 있음을 나타낸다.  이렇게 세팅하면 ```home``` 어플리케이션에서 노출된 어떤 컴포넌트들도 접근할 수 있게 된다.  
+
+이제, 공유된 navbars를 가지고 있는 ```about``` 어플리케이션의 ```App.jsx``` 컴포넌트를 아래처럼 수정한다.  
+```
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import Header from "home/Header";
+import Footer from "home/Footer";
+const App = () => (
+  <div className="text-3xl mx-auto max-w-6xl">
+    <Header />
+    <div class="text-center">
+      <img
+        src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
+        class="rounded-full w-32 mb-4 mx-auto"
+        alt="Avatar"
+      />
+      <h5 class="text-xl font-medium leading-tight mb-2">John Doe</h5>
+      <p class="text-gray-500">Web designer</p>
+    </div>
+    <Footer />
+  </div>
+);
+ReactDOM.render(<App />, document.getElementById("app"));
+```
+
+```dev-server```를 재시작한다. 브라우저에서 아래의 그림을 볼 수 있다.  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/7de6abd4-64ff-401f-bec1-69f80d6bd697)  
+
+위 코드와 UI를 통해서 두 개의 어플리케이션 사이에서 컴포넌트들이 (마이크로 프론트엔드를 적용해서) 성공적으로 공유되고 있음을 보았다.  
+
+## 결론 
+이번 글에서 우리는 마이크로 프론트엔드 개념을 예제와 함께 살펴보았으며, 프론트엔드 모노리스 어플리케이션 대비 장점을 나열하였다. 마이크로 프론트엔드를 적용함으로써 어떤 나이스한 기능을 쉽게 적용하여 제공할 수 있다.  
+
+```create-mf-app```을 사용해서, 마이크로 프론트엔드 아키텍처를 쉽게 구현하였다. 개인적으로는 마이크로 프론트엔드 스타일을 좋아한다. 이는 팀들 사이에서 유지보수를 쉽게 해 주기 때문이다. 추가적으로 프론트엔드 빌딩과 보안도 꽤 우아하게 관리된다.  
+
+모두에게 유익한 글이 되었으면 좋겠고 작은 질문이라도 (있으면) 남겨 주시기 바랍니다. Happy coding !!!
