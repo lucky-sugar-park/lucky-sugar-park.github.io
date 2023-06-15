@@ -30,6 +30,7 @@ D. Create an Amazon CloudFront distribution for the metadata service. Create an 
   A(45%), D(26%), C(16%), B(14%)<br/>
   A와 D의 차이점은 CloudFront function vs Lambda@Edge 임. 이 경우에 CloudFront function 이 더 빠르고 가벼운 방법으로 헤더의 일부 내용을 제거할 수 있음  
   => Examtopics에서는 A를 정답이라고 한 사람이 가장 많은데, Lambda@Edge를 통해서 Header의 일부 정보를 제거할 수 있는 것으로 소개하고 있음  
+  <br/>
   ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/f147bc21-895f-45e5-8263-a246488a0d36)
 
 </deatils>
