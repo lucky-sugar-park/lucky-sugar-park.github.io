@@ -91,4 +91,39 @@ React는 인기 있는 프론트엔드 기술 스텍이기 때문에 마이크�
 #### 쉬운 테스트  
 당연한 말이지만, 통합 테스트로 넘어가기 전에, 어플리케이션의 개별 부분들을 테스트하는 것이 좋다. 개발 팀들은 어플리케이션을 테스트 하기 전에 마이크로 프론트엔드를 테스트할 것이다. 이렇게 함으로써, 실제 시스템에서 버그의 가능성을 줄일 수 있다.  
 
-이런 측면과는 별개로, **작은 코드 베이스** (쉽운 유지보수 가능
+이런 측면과는 별개로, **작은 코드 베이스** (쉽운 유지보수 가능)와 시스템으로부터 어떤 모듈을 빨리 추가/제거할 수 있는 능력을 확보할 수 있다.  
+
+## 사전조건  
+여기에서는 React를 사용해서 마이크로 프론트엔드를 구축해 본다. 이를 위해서는 다음의 조건을 만족해야 한다.  
+<br/>
+- 자바스크립트에 대한 기본 지식
+- React에 대한 기본 지식
+- Webpack에 대한 기본 지식
+- Node.js v19가 설치되어 있어야 함
+
+코드를 따라가기 위해서는 [check out the Github reop](https://github.com/lawrenceagles/micro-frontend-react) 로부터 소스코드를 clone 할 수 있다. 
+
+## 마이크로 프론트엔드 시작하기
+micro-frontend-react라는 어플리케이션 폴더를 생성한다. 이 폴더로부터 React micro-frontend 어플리케이션을 시작하기 위해서는 ```npx create-mf-app```를 구동하고 다음의 정보를 대화형 터미널에서 입력한다.  
+<br/>
+- Name: ```home```
+- Project type: ```Application```
+- Port Number: ```3000```
+
+React, JavaScript, Tailwind를 선택한다. ```home```이라 불리는 React 마이크로 프론트엔드 어플리케이션은 시작될 것이다.  터미널에서 다음의 그림을 볼 수 있어야 한다.  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/5bc8df61-94c8-401f-9a00-f79fbf193875)  
+
+```home``` 폴더로부터 어플리케이션을 테스트하기 위해서는 ```yarn install```을 실행한다 (종속 라이브러리 설치), ```dev-server```를 구동하기 위해서 ```yarn start``` 명령어를 실행한다. 만약 모두 성공하면 다음의 그림이 보여야 한다. 
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/5716595d-fe03-443e-a1e8-7d76fbd8e412)
+
+```about``` 폴더에서 다음의 데이터를 사용하여 위의 스텝을 반복한다. 
+<br/>
+- Name: ```about```
+- Project type: ```Application```
+- Port Number: `3001```
+
+앞에서와 같이 React, Javascript 그리고 Tailwind를 선택한다.  
+
+최종적으로 어플리케이션을 테스트하기 위해서 ```yarn install``` 명령어로 종속 라이브러리를 설치하고 ```yarn start``` 명령어로 ```dev-server```를 시작한다. 모든 것이 성공적으로 완료되면 다음의 그림이 보여야 한다.  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/a38277e2-9497-45fe-b561-9dd58fe4e8f3)
