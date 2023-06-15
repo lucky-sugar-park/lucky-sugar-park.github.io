@@ -46,8 +46,25 @@ CloudFront는 AWS에서 제공하는 CDN 서비스 임. 캐싱을 통해 사용�
 2. Edge Server의 기본 TTL은 24시간이고 사용자의 설정에 따라 변경가능함 (TTL 수정 시 Edge Server 반영시간은 1시간 정도)  
    - 캐시 설정 후 반영시간 때문에, 전체 데이터에 대한 TTL을 수정하지 않고 개별 데이터에 대한  Invalidation API (특정 파일을 캐시에서 삭제하는 기능)을 통해 삭제 가능함  
    - Invalidation API는 동시에 최대 3개의 요청을 발생시킬 수 있으며, 각 요청은 최대 1,000개까지 가능함
-   - Invalidation API는 Edge Node에 반영되기까지 5~10분 정도 소요됨  
+   - Invalidation API는 Edge Node에 반영되기까지 5~10분 정도 소요됨
+  
+## Lambda@Edge  
+Amazon CloudFront의 기능중 하나로써 어플리케이션의 사용자에게 더 가까운 위치에서 코드를 실행하여 성능을 개선하고 지연시간을 단축할 수 있게 해 준다.  
+콘텐츠 전송을 위해 CDN 종류 중 하나인 CloudFront에 함수를 등록할 수 있게 해 주는 것이 Lambda Edge 이다.  
 
+따라서 Lambda@Edge는 CloudFront에 접근할 때 실행되는 Lambda의 확장판이며, CloudFront 이벤트가 발생할 때에 Lambda 함수를 실핼 할 수 있다.  
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/f147bc21-895f-45e5-8263-a246488a0d36)
+
+#### 이벤트 종류
+- Viewer Request : CloudFront가 뷰어로부터 요청을 받고 요청한 개체가 edge cache에 있는지 확인하기 전에 함수를 실행
+- Origin Request : CloudFront가 오리진으로 요청을 전달할 때만 실행. 요청한 개체가 edge cache에 있으면 함수가 실행되지 않는다
+- Origin Response : CloudFront가 오리진으로부터 응답을 받은 후 응답에 개체를 cache하기 전에 함수를 실행
+- Viewer Response : 요청한 개체를 뷰어에 반환하기 전에 기능이 실행. 이 함수는 개체가 edge cache에 이미 있는지 여부에 관계없이 실행
+
+Origin Response는 CDN에 연결된 Origin이 응답을 (원본 이미지, 헤더 등 포함) 반환한 후에 동작하는 이벤트이다. 
+
+<br/>
 ## 더 많은 정보 
 https://inpa.tistory.com/entry/AWS-%F0%9F%93%9A-CloudFront-%EA%B0%9C%EB%85%90-%EC%9B%90%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%84%B8%ED%8C%85-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC
 
