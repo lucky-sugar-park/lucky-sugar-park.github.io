@@ -1,5 +1,5 @@
 ---
-title: "Frontend conding convention"
+title: "React best practices"
 last_modified_at: 2023-06-17T18:17:02-05:00
 categories:
   - Blog
