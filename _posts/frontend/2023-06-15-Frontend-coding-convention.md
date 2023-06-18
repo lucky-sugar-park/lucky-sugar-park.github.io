@@ -119,12 +119,13 @@ tests/
   User.test.js
 ```  
 
-2. Grouping by Level of componnet
+2. Grouping by Level of componnet 
 
    ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/9dd00cc1-7195-4505-9979-ebd2d1d5fb4f)
 
-3. Other examples
+3. Other examples  
    ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/b408c508-6680-4a29-8c40-056456c0cfc7)
+   
    ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/552d3dde-8dbc-4754-b004-d149f925fa37)
 
 
@@ -160,7 +161,7 @@ tests/
 9. CSS files should be named the same as the component (CookieBanner.jsx, CookieBanner.css, Header.jsx, Header.css)  
 
 #### Files and Folders 
-1. Your app's directory structure shall be as follows
+1. Your app's directory structure shall be as follows  
 
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/7ec10506-7f40-4147-8dca-9bfacd35d494)  
 
@@ -178,11 +179,9 @@ tests/
 2. Remove **console.logs** - unless you have strong motivation why you would like it iin case of **production mode**
 3. **Avoid multiple if-else blocks**. Instead, **use ternary** - best for clean code practice
 4. **Remove all commented-out codes**. The biggest motivation for writig comments is the bad code that you write. It would be good to spend more time writing descriptive functions, methods, and filenbames that are self-explanatory.
-5. Write Tests for each components. It's a good practice to write test cases for each component developed as it reduces the chances of getting errors when deployed. You can check all the possible scenarios through until testing - and for that, some of the most commonly used React test frameworks you can use are JEST and ENZYME ([JEXT vs Mocha](https://www.ponicode.com/blog/jest-versus-mocha-which-testing-framework-for-you))
-
-6. Use Optional chaining if things can be null
-
-```
+5. Write Tests for each components. It's a good practice to write test cases for each component developed as it reduces the chances of getting errors when deployed. You can check all the possible scenarios through until testing - and for that, some of the most commonly used React test frameworks you can use are JEST and ENZYME ([JEXT vs Mocha](https://www.ponicode.com/blog/jest-versus-mocha-which-testing-framework-for-you))  
+6. Use Optional chaining if things can be null  
+```  
 const adventurer = {
   name: 'Alice',
   cat: {
@@ -196,17 +195,16 @@ console.log(dogName);
  
 console.log(adventurer.someNonExistentMethod?.());
 // expected output: undefined
-```
 
-7. Use the guard pattern/prop types/typescript to ensure your passed in parameters re valid
+```  
 
+7. Use the guard pattern/prop types/typescript to ensure your passed in parameters re valid  
 8. Create PURE functions and avoid side-effects  
-   - PURE function: Sampe input, Same output  
+   - PURE function: Sampe input, Same output
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/a718b424-98fd-4223-ac7f-6d1fc43c87c9)  
 
-```
+```  
 // No so bad
- 
 const impureDouble = (x) => {
   console.log('doubling', x);
  
@@ -248,8 +246,7 @@ console.log({
   person,
   result
 });
- 
- 
+  
 // another way
 onst pureAssoc = (key, value, object) => {
   const newObject = { ...object };
@@ -269,7 +266,7 @@ console.log({
   person,
   result
 });
-```  
+```   
 
 9. **Avoid mutating** state when working with arrays
 10. Treat **props as read-only**. Do not try modify them
@@ -280,6 +277,7 @@ console.log({
     -  Mixins introduce implicit dependencies, cause name clashes, and cause snowballing complexity. Most use cases for mixins can be accomplished in better ways via components, higher-order components, or utility modules
 15. Methods that are longer that the screen should be refactored into smaller units
 16. Use JSX ShortHand
+
 ```
 // Bad
 return (
@@ -291,7 +289,8 @@ return (
     <navbar showTitle />
 )
 ```
-17. Use Ternary operators
+
+17. Use Ternary operators  
 
 ```
 // Bad
@@ -309,7 +308,7 @@ const { role } = user;
 return role === ADMIN ? <AdminUser /> : <NormalUser />
 ```
 
-18. Take Advantage of Object Literals
+18. Take Advantage of Object Literals  
 ```
 // Bad
 cost { role } = user;
@@ -337,7 +336,7 @@ const Component = components[role];
 return <Component />;
 ```
 
-19. Use Fragments
+19. Use Fragments  
 ```
 // Bad
 return (
@@ -359,6 +358,7 @@ return (
 ```
 
 20. Don't define a function inside rende
+
 ```
 // Bad
 return (
