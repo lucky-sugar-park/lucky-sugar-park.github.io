@@ -30,8 +30,7 @@ tags:
 ## React coding conventions 
 #### 디렉토리 구조  
 1. The react documentation mentions that there are in general two main ways to organize your React application.  
-- Grouping by features or routes
-     
+   - Grouping by features or routes  
 ```
 src/
 App.js
@@ -67,9 +66,7 @@ user/
   User.js
   User.test.js
 ```  
-
-- Grouping by file type
-     
+   - Grouping by file type    
 ```
 src/
 App.js
@@ -117,17 +114,12 @@ tests/
   Settings.test.js
   ShoppingCart.test.js
   User.test.js
-```  
-
-2. Grouping by Level of componnet 
-
-   ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/9dd00cc1-7195-4505-9979-ebd2d1d5fb4f)
-
+```   
+2. Grouping by Level of componnet  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/9dd00cc1-7195-4505-9979-ebd2d1d5fb4f)  
 3. Other examples  
-   ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/b408c508-6680-4a29-8c40-056456c0cfc7)
-   
-   ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/552d3dde-8dbc-4754-b004-d149f925fa37)
-
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/b408c508-6680-4a29-8c40-056456c0cfc7)  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/552d3dde-8dbc-4754-b004-d149f925fa37)  
 
 #### 코드구조 
 1. **import statement order**: React import <> 3 party library import <> import * as <> import ./<some file>
@@ -155,30 +147,25 @@ tests/
 5. It's bad to use the underscore prefix ( _ ) for a React component's internal methods because underscore prefixes seem to used as a convention in other languages to denote private objects or variables. But everything in JavaScript is public. And there is no native support for privacy. So even if you add underscore prefixes to your properties, It'll not make them private.  
 6. When making reducer functions, write **Action** types as **domain/eventName**. For example: **ADD_TODO** and **INCREMENT** (in CAPITALS) as this matches the typical conventions in most programming languages for declaring the constant values.
 7. Talking about cases in a React component, use **PascalCase** for the same - and for their instances use camelCase
-   - const loginForm = <LoginForm />
-   -  import LoginForm from './loginForm';
-8. For the folder name,. use **snake-case**
+   - ```const loginForm = <LoginForm />```
+   - ```import LoginForm from './loginForm';```
+8. For the folder name, use **snake-case**
 9. CSS files should be named the same as the component (CookieBanner.jsx, CookieBanner.css, Header.jsx, Header.css)  
 
-#### Files and Folders 
+#### Files and Folders  
 1. Your app's directory structure shall be as follows  
-
-![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/7ec10506-7f40-4147-8dca-9bfacd35d494)  
-
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/7ec10506-7f40-4147-8dca-9bfacd35d494)   
 2. Each component folder should have its respective files grouped under the same. It maintains the hierarchy throughout the codebase. The necessary files include: Comonent.jsx, Component.css, Component.test.js  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/0c375cde-db4a-4e7e-92f7-48297b954464)   
+3. If a component requires multiple file (css, test) **locate all files within component a folder**  
 
-![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/0c375cde-db4a-4e7e-92f7-48297b954464)  
-
-3. If a component requires multiple file (css, test) **locate all files within component a folder**
-
-#### Code 
+#### Code  
 1. Play the game of HOOKS by following all its rules. You can read more about the rules [here](https://www.smashingmagazine.com/2020/04/react-hooks-best-practices/)  
    - Either manually follow these rules or use an ESLint plugin called **eslint-plugin-react-hooks** which enforces these rules. So, add these rules while working on any project
-   - ```npm install --savedev eslint-plugin-react-hooks```
-  
-2. Remove **console.logs** - unless you have strong motivation why you would like it iin case of **production mode**
-3. **Avoid multiple if-else blocks**. Instead, **use ternary** - best for clean code practice
-4. **Remove all commented-out codes**. The biggest motivation for writig comments is the bad code that you write. It would be good to spend more time writing descriptive functions, methods, and filenbames that are self-explanatory.
+   - ```npm install --savedev eslint-plugin-react-hooks```  
+2. Remove **console.logs** - unless you have strong motivation why you would like it iin case of **production mode**  
+3. **Avoid multiple if-else blocks**. Instead, **use ternary** - best for clean code practice  
+4. **Remove all commented-out codes**. The biggest motivation for writig comments is the bad code that you write. It would be good to spend more time writing descriptive functions, methods, and filenbames that are self-explanatory.  
 5. Write Tests for each components. It's a good practice to write test cases for each component developed as it reduces the chances of getting errors when deployed. You can check all the possible scenarios through until testing - and for that, some of the most commonly used React test frameworks you can use are JEST and ENZYME ([JEXT vs Mocha](https://www.ponicode.com/blog/jest-versus-mocha-which-testing-framework-for-you))  
 6. Use Optional chaining if things can be null  
 ```  
@@ -197,10 +184,9 @@ console.log(adventurer.someNonExistentMethod?.());
 // expected output: undefined
 
 ```  
-
 7. Use the guard pattern/prop types/typescript to ensure your passed in parameters re valid  
 8. Create PURE functions and avoid side-effects  
-   - PURE function: Sampe input, Same output
+   - PURE function: Sampe input, Same output  
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/a718b424-98fd-4223-ac7f-6d1fc43c87c9)  
 
 ```  
@@ -266,19 +252,17 @@ console.log({
   person,
   result
 });
-```   
-
-9. **Avoid mutating** state when working with arrays
-10. Treat **props as read-only**. Do not try modify them
-11. **No DRY** (Don't repeat yourself) violations. Create utility files to avoid duplicate code
-12. Use **Higher Order Components** where appropriate
-13. Favour functionless components
+```  
+9. **Avoid mutating** state when working with arrays   
+10. Treat **props as read-only**. Do not try modify them  
+11. **No DRY** (Don't repeat yourself) violations. Create utility files to avoid duplicate code  
+12. Use **Higher Order Components** where appropriate  
+13. Favour functionless components  
 14. **Do not use mixins** (다중 상속이 가능하도록 하는 라이브러리 - 종속 충돌 문제도 있지만 다중상속으로 인한 부작용이 더 큰 문제임)
     -  Mixins introduce implicit dependencies, cause name clashes, and cause snowballing complexity. Most use cases for mixins can be accomplished in better ways via components, higher-order components, or utility modules
 15. Methods that are longer that the screen should be refactored into smaller units
-16. Use JSX ShortHand
-
-```
+16. Use JSX ShortHand   
+``` 
 // Bad
 return (
     <navbar showTitle={ true } />
@@ -291,7 +275,6 @@ return (
 ```
 
 17. Use Ternary operators  
-
 ```
 // Bad
 const { role } = user;
@@ -308,7 +291,7 @@ const { role } = user;
 return role === ADMIN ? <AdminUser /> : <NormalUser />
 ```
 
-18. Take Advantage of Object Literals  
+18. Take Advantage of Object Literals   
 ```
 // Bad
 cost { role } = user;
@@ -336,7 +319,7 @@ const Component = components[role];
 return <Component />;
 ```
 
-19. Use Fragments  
+19. Use Fragments   
 ```
 // Bad
 return (
@@ -357,8 +340,7 @@ return (
 )
 ```
 
-20. Don't define a function inside rende
-
+20. Don't define a function inside rende  
 ```
 // Bad
 return (
@@ -377,9 +359,8 @@ return (
 )
 ```
 
-21. 리엑트 훅을 적극적으로 활용하라 ( 물론 Usage를 정확하게 알고 사용해야 함 )
-22. Use object destructuring
-
+21. 리엑트 훅을 적극적으로 활용하라 ( 물론 Usage를 정확하게 알고 사용해야 함 )  
+22. Use object destructuring  
 ```
 // Bad
 return (
@@ -402,7 +383,7 @@ return (
 )
 ```
 
-23. String props don't need curly brace
+23. String props don't need curly brace  
 ```
 // Bad
 return (
@@ -415,7 +396,7 @@ return (
 )
 ```
 
-24. Remove JS code from JSX
+24. Remove JS code from JSX  
 ```
 // Bad
 return (
@@ -443,7 +424,7 @@ return (
 );
 ```
 
-25. Use Template Literals
+25. Use Template Literals  
 ```
 // Bad
 const userDetails = user.name + "'s profession is" + user.proffession
@@ -460,7 +441,7 @@ return (
 )
 ```
 
-26. Import in Order
+26. Import in Order  
 ```
 // Bad
 import React from 'react';
@@ -479,7 +460,7 @@ import ErrorImg from '../../assets/images/error.png';
 import colors from '../../styles/colors';
 ```
 
-27. Reserved Prop Naming
+27. Reserved Prop Naming  
 ```
 // Bad
 <MyComponent style="dark" />
@@ -490,8 +471,8 @@ import colors from '../../styles/colors';
 <MyComponent variant="fancy" />
 ```
 
-28. Prop naming => camelCase
-29. JSX in Parentheses
+28. Prop naming => camelCase  
+29. JSX in Parentheses  
 ```
 // Bad
 return <MyComponent variant="long">
@@ -506,7 +487,7 @@ return (
 );
 ```
 
-30. Self-closing Tags
+30. Self-closing Tags  
 ```
 // Bad
 <SomeComponent variant="stuff"></SomeComponent>
@@ -515,7 +496,7 @@ return (
 <SomeComponent variant="stuff" />
 ```
 
-31. Underscore in method name
+31. Underscore in method name  
 ```
 // Bad
 const _onClickHandler = () => {
@@ -529,7 +510,7 @@ const onClickHandler = () => {
 ```
 
 32. Alt prop
-    - Always include an alt prop in your <img > tags. And don’t use picture or image in your alt property because the screenreaders already announce img elements as images. No need to include that  
+    - Always include an alt prop in your <img > tags. And don’t use picture or image in your alt property because the screenreaders already announce img elements as images. No need to include that   
 ```
 // Bad
 <img src="hello.jpg" />
@@ -539,13 +520,12 @@ const onClickHandler = () => {
 // Good
 <img src="hello.jpg" alt="Me waving hello" />
 ```
-
-33. Avoid using indexes as a key props
-34. Use default props and prop types ( or typescript )
-35. Isolate stateful aspects from rendering
+33. Avoid using indexes as a key props  
+34. Use default props and prop types ( or typescript )  
+35. Isolate stateful aspects from rendering  
     - React components can be stateful or stateless. The stateful components keep track of changing data while the stateless components always render the same data
     - To minimize the component complexity it is always a good pratice to isolate your stateful data-loading logic from the rendering stateless logic  
-36. The Rule of 3
+36. The Rule of 3  
 ```
 // Fine ( less than 3 )
 const Gallery = (props) => {
@@ -574,7 +554,7 @@ const Gallery = (props) => {
 #### Good commenting pratices 
 1. Use comments to explain why you did something, not how you did it.
    - If you find yourself expaining how you did something, then it's time to make your code self-explanatory
-2. Another point is **not to write comments that are obvious and reduncant**
+2. Another point is **not to write comments that are obvious and reduncant**  
 ```
 // Prints out the sum of two numbers
 console.log(sum);
@@ -584,7 +564,7 @@ console.log(sum);
 1. Always destructure you props. Destructuring you props helps make your code cleaner and more maintainable. It also makes assigning object properties to variables feels like much less of a chore
 2. Know where to use spread/rest operators. You shall read about it before actually using it.
    -  REST: 프로젝트 내에서 별도의 Rule이 필요함 (정의해야 함) → REST API 호출하는 자바 스크립트 모듈 구조의 표준, naming 표준 등
-   -  Spread 연산자 잘 사용하기
+   -  Spread 연산자 잘 사용하기  
 ```
 // Array
 var arr1 = [1, 2, 3, 4, 5];
