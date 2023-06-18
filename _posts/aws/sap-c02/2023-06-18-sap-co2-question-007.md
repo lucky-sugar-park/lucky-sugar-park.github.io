@@ -29,5 +29,8 @@ D. Upload the container images to AWS Elastic Beanstalk. In Elastic Beanstalk, c
   B (79%)<br/>
   A, B, C가 모두 working 가능한 것인데, 비용 측면만 보면 A가 가장 저렴함 (비용측면: A < B < C)  
   하지만 문제 사이트 커뮤니티에서는 B를 정답으로 추천하는 사람이 가장 많음  
-  -> A는 문제를 만족하기 힘들다는 의견도 있음 (Lambda function으로 어플리케이션을 통째로 구현하기에는 무리가 따를 수도)  
+  -> A는 문제를 만족하기 힘들다는 의견도 있음 (Lambda function으로 어플리케이션을 통째로 구현하기에는 무리가 따를 수도)   
+  -> ECS는 docker container 오케스트레이녓 서비스, EKS는 쿠버네트스 컨테이너 서비스    
+  -> A is not correct, AWS documentation says you can package and deploy Lambda functions as container images.  
+  -> D: AWS Elastic Beanstalk에 컨테이너 이미지를 올리는 것은 불가능 (A도 마찬가지)  
 </deatils>
