@@ -179,7 +179,9 @@ tests/
 3. **Avoid multiple if-else blocks**. Instead, **use ternary** - best for clean code practice
 4. **Remove all commented-out codes**. The biggest motivation for writig comments is the bad code that you write. It would be good to spend more time writing descriptive functions, methods, and filenbames that are self-explanatory.
 5. Write Tests for each components. It's a good practice to write test cases for each component developed as it reduces the chances of getting errors when deployed. You can check all the possible scenarios through until testing - and for that, some of the most commonly used React test frameworks you can use are JEST and ENZYME ([JEXT vs Mocha](https://www.ponicode.com/blog/jest-versus-mocha-which-testing-framework-for-you))
+
 6. Use Optional chaining if things can be null
+
 ```
 const adventurer = {
   name: 'Alice',
@@ -197,9 +199,10 @@ console.log(adventurer.someNonExistentMethod?.());
 ```
 
 7. Use the guard pattern/prop types/typescript to ensure your passed in parameters re valid
-8. Create PURE functions and avoid side-effects
-   - PURE function: Sampe input, Same output
-![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/a718b424-98fd-4223-ac7f-6d1fc43c87c9)
+
+8. Create PURE functions and avoid side-effects  
+   - PURE function: Sampe input, Same output  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/a718b424-98fd-4223-ac7f-6d1fc43c87c9)  
 
 ```
 // No so bad
@@ -213,7 +216,6 @@ const impureDouble = (x) => {
 const result = impureDouble(4);
 console.log({ result }); // side effects here
  
-...
 // “Impurely” Changing an Object
 const impureAssoc = (key, value, object) => {
   object[key] = value;
