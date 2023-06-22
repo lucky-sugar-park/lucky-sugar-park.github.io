@@ -152,9 +152,122 @@ vercel은 multi-zones를 마이크로 프론트엔드 아키텍처를 구현하�
 웹앱별 배포로 해결할 수 없는 문제는 해결하기 어려이 있다고 한다.  (https://maxkim-j.github.io/posts/runtime-integration-micro-frontends/) 참조.  
 
 #### Build time integration  
+각 마이크로 프론트엔드를 패키지 저장소에 (예, npm repository) 배포하고, 빌드시에 어플리케이션에 라이브러리 종속으로 포함되도록 하는 방식이다.  
+쉽게 말하면, UI 부분들을 npm 패키지로 만들어 리포지토리에 배포하고 어플리케이션의 package.json에 의존성과 버전을 표기한 후에 빌드/배포 하는 방식을 의미한다.  
+아래의 package.json 파일 일부 내용을 보자.  
+```
+{
+  "name": "@feed-me/container",
+  "version": "1.0.0",
+  "description": "A food delivery web app",
+  "dependencies": {
+    "@feed-me/browse-restaurants": "^1.2.3",
+    "@feed-me/order-food": "^4.5.6",
+    "@feed-me/user-profile": "^7.8.9"
+  }
+}
+```
 
-#### Run time integration via iframe
+이 접근 방식은 javascript 번들을 생성하여 다양한 어플리케이션에서 공통적으로 사용되는 코드의 중복을 제거할 수 있으나,   
+마이크로 프론트엔드로 배포된 일부 패키지가 변경되는 경우에, 모든 단일 마이크로 프론트엔드를 다시 컴파일하고 릴리스해야 함을 의미한다.  
+
+때문에 이 방식은 어플리케이션을 독립적으로 개발/테스트할 수 있는 별도의 코드베이스로 나누는 효과는 볼 수 있으나,  
+모노리스 프론트엔드로 인한 고통을 여전히 해결하지 못한다 (웹 앱별 배포가 불가능함으로 인한, 유지보수의 어려움)  
+
+#### Run time integration via iframe  
+여기서부터 확실히 페이지 단위 이하로 배포 단위를 분리할 수 있는 방법들이면서, 분절된 UI 컴포넌트를 런타임에 통합하는 방식이다.  
+
+iframe은 현재도 배포단위를 UI 단위로 분리하기 위해, 혹은 다은 웹앱의 UI 일부를 다른 웹 앱안으로 통합하기 위해 종종 사용되는 방식으로써,  
+iframe을 사용하면 특정 외부 URL로 배포해 놓은 UI의 일부를 HTML로 통째로 기존 HTML에 쉽게 놓을 수 있고,  
+독립적인 하위 페이지로써 페이지를 쉽게 만들고 배포할 수 있다.  
+또한 서로 간섭하지 않는 스타일 및 전역변수 측면에서 상당한 수준의 격리를 이룰 수 있다.  
+```
+<html>
+  <head>
+    <title>Feed me!</title>
+  </head>
+  <body>
+    <h1>Welcome to Feed me!</h1>
+
+    <iframe id="micro-frontend-container"></iframe>
+
+    <script type="text/javascript">
+      const microFrontendsByRoute = {
+        '/': 'https://browse.example.com/index.html',
+        '/order-food': 'https://order.example.com/index.html',
+        '/user-profile': 'https://profile.example.com/index.html',
+      };
+
+      const iframe = document.getElementById('micro-frontend-container');
+      iframe.src = microFrontendsByRoute[window.location.pathname];
+    </script>
+  </body>
+</html>
+```
+
+iframe은 새로운 기술이 아니며 그리 흥미롭지 않을 수도 있는데, 앞서 나열된 마이크로 프론트엔드의 주요 이점을 다시 살펴보면  
+어플리케이션을 분할하고 팀을 구성하는 방법에 주의를 기울이면 iframe이 대부분 적합할 수 있다.  
+
+하지만 iframe injection 같은 보안 문제 때문에 사용부담이 있을 수 있다.   
+
+만약 iframe으로 분리되어 있는 UI 컴포넌트에서 다른 컴포넌트와 상태 값을 공유해야 한다면, window.postMessage(), EventListener와 같은  Web API를 활용하는 등 상태공유 방법을 고민해야 한다.  
 
 #### Run time integration via web component
 
-#### Run time integration via javascript
+
+#### Run time integration via javascript 
+가장 유연한 방식이며, 프론트엔드 개발 팀에서 가장 많이 채택되는 방식이다.  
+이 방식은 UI 컴포넌트를 자바 스크립트 번들 단위로 배포단위를 나누고, 필요할 때에 번들을 로딩하여 런타임 시에 통합하는 방식이다.  
+각 마이크로 프론트엔드는 태그를 사용하여 페이지에 포함되며,  
+<scropt> 로드시 전역함수를 진입점으로 노출한다. 그런 다음 컨테이너 어플리케이션은 어떤 마이크로 프론트엔드를 마운트해야 하는지를 결정하고  
+관련함수를 호출하여 마이크로 프론트엔드에게 언제, 어디서 렌더링되어야 하는지 알려준다.  
+
+```
+<html>
+  <head>
+    <title>Feed me!</title>
+  </head>
+  <body>
+    <h1>Welcome to Feed me!</h1>
+
+    <!-- These scripts don't render anything immediately -->
+    <!-- Instead they attach entry-point functions to `window` -->
+    <script src="https://browse.example.com/bundle.js"></script>
+    <script src="https://order.example.com/bundle.js"></script>
+    <script src="https://profile.example.com/bundle.js"></script>
+
+    <div id="micro-frontend-root"></div>
+
+    <script type="text/javascript">
+      // These global functions are attached to window by the above scripts
+      const microFrontendsByRoute = {
+        '/': window.renderBrowseRestaurants,
+        '/order-food': window.renderOrderFood,
+        '/user-profile': window.renderUserProfile,
+      };
+      const renderFunction = microFrontendsByRoute[window.location.pathname];
+
+      // Having determined the entry-point function, we now call it,
+      // giving it the ID of the element where it should render itself
+      renderFunction('micro-frontend-root');
+    </script>
+  </body>
+</html>
+```
+
+위의 예와 같이 (빌드통합과 달리) 각각 bundle.js 파일을 독립적으로 배포할 수 있다.
+
+React를 사용한다고 가정하면, "정의한 컴포넌트들을 떼어 내서 별도의 배포단위로 만들고 런타임 시에 합치는 것이 가능하다".  
+작은 단위의 컴포넌트부터 런타임 시에 사용될 수 있는 독립된 번들로 만드는 것이다.  
+
+React에서 제공하는 API들을 통해 어플리케이션 안에서 자연스럽게 배포단위별로 공유되는 상태관리가 가능하다. 또한 미리 로딩된 (어플리케이션이 가져온) CSS와 같은 Resource들도 곧바로 사용할 수 있다.  
+
+이 방법의 가장 큰 장점은 배포단위를 유연하게 가져갈 수 있다는 것이다. 배포단위간 상태공유 작업이 다른 런타임 통합방식보다 이질적이지 않고,   
+(모두 웹 어플리케이션 내부에서 가능하므로) 기존 배포단위를 합치거나 나누는 것이 비교적 간단함  
+
+Webpack 5에서 제공되는 Module Fedration Plugin 이 이 방식에 해당되는 솔루션이다. 이 플러그인은 (분리된 배포단위의) 웹 어플리케이션이 모이는 일명 host와  
+각각 분리된 배포단위인 remote 앱을 정의하고 런타임 시에 통합할 수 있는 옵션을 제공한다.  
+
+이 플러그인 창시자인 Zack Jackson의 표현인데, 플러그인의 컨셉을 아주 잘 설명하고 있음  
+> Module Federation Plugin을 사용하면 거대한 웹 앱을 따로 개발해 빌드/배포하는 것으로 MSA의 장점을 가져가고,
+> 런 타임에서는 모놀리스처럼 통합되어 통합의 자연스러움과 상태관리의 이점을 얻을 수 있다  
