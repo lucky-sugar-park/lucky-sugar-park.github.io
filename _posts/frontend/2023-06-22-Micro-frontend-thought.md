@@ -211,9 +211,20 @@ iframe은 새로운 기술이 아니며 그리 흥미롭지 않을 수도 있는
 하지만 iframe injection 같은 보안 문제 때문에 사용부담이 있을 수 있다.   
 
 만약 iframe으로 분리되어 있는 UI 컴포넌트에서 다른 컴포넌트와 상태 값을 공유해야 한다면, window.postMessage(), EventListener와 같은  Web API를 활용하는 등 상태공유 방법을 고민해야 한다.  
+<br/>
 
 #### Run time integration via web component
+웹 컴포넌트란 **모든 주요 브라우저에서 지원하는 웹 표준 기반의 재사용 가능한 클라이언트 사이드 컴포넌트** 이다. 코드에서 원하는 부분을 **캡슐화**하는 훌륭한 방법을 제공하며 모든 웹 어플리케이션과 웹 제이지에서 재사용할 수 있다.  
+웹 컴포넌트에 대한 자세한 설명은 [여기](https://yozm.wishket.com/magazine/detail/1193/)를 참조한다.  
 
+이 방식을 사용하면 iframe와 같은 보안 문제를 해결할 수 있으며 분리된 HTML을 기존 앱에 쉽게 통합할 수 있다.  
+이 방식은 기존 React나 Vue등과 방식이 조금 달라져야 한다. 이 방식을 사용한다고 해서 기존 React와 같은 프레임워크 (또는 라이브러리)를 사용할 수 없는 것은 아니고,  
+두 개의 기술 (Web Component + React, Web Component + Vue ...)을 조합해서 컴포넌트 개발하는 것도 가능하며, "Runtime integration via java script" 방식을 적용할 수 있다.  
+> 사실 Martin Flowler가 왜 이 두개를 별개의 방식으로 구분했는지는 잘 이해가 가지 않는다. 결국 컴포넌트를 만드는 기술의 차이만 존재할 뿐, 마이크로 프론트엔드 관점에서 보면 동일하게 Webpack 5의 Module Fedration 기술을 사용할 수 있기 때문이다.
+> 다만, 순수하게 Web Compoenent 기술만 사용한다면 컴포넌트간 커뮤니케이션 및 상태 데이터 등의 공유가 쉽지 않은 것처럼 보인다.
+> 때문에 React + Web Component나 Vue + Web Component와 같은 조합으로 이런 문제들을 어느정도 해결할 수 있을 것 같다.  
+
+<br/>
 
 #### Run time integration via javascript 
 가장 유연한 방식이며, 프론트엔드 개발 팀에서 가장 많이 채택되는 방식이다.  
@@ -271,3 +282,59 @@ Webpack 5에서 제공되는 Module Fedration Plugin 이 이 방식에 해당되
 이 플러그인 창시자인 Zack Jackson의 표현인데, 플러그인의 컨셉을 아주 잘 설명하고 있음  
 > Module Federation Plugin을 사용하면 거대한 웹 앱을 따로 개발해 빌드/배포하는 것으로 MSA의 장점을 가져가고,
 > 런 타임에서는 모놀리스처럼 통합되어 통합의 자연스러움과 상태관리의 이점을 얻을 수 있다  
+
+
+## 스타일링 
+언어로써의 CSS는 전통적으로 모듈 시스템, 네임스페이스 또는 캡슐화 없이 본질적으로 전역적이고 상속되며 연속적이다. 이러한 기능중 일부는 현재 존재하지만 브러우저 지원이 부족한 경우가 많다.  
+마이크로 프론트엔드 환경에서는 이러한 문제중 많은 부분이 더 안 좋아 진다. 예를 들면, 어느 팀의 마이크로 프론트엔드에 ```h2 { color : black; }``` 이라는 스타일이 있고, 다른 팀에는 ```h2 { color: blue; }``` 이라는 스타일이 있는데, 동일한 페이지에 이 두개의 스타일이 있게 된다면 어느 한쪽은 잘못된 동작을 할 것이다.  이게 새로운 문제는 아니지만 서로 다른 팀에 의해서 각자의 스타일이 작성되고 (아마도) 별도의 저장소에 분할되어 발견하기가 더 어려울 것이다.  
+
+수년에 걸쳐서 CSS를 보다 쉽게 관리할 수 있도록 많은 접근방식이 개발되어왔다. 일부는 [BEM](https://getbem.com/)과 같은 엄격한 명명규칙을 사용해서 선택자가 의도한 곳에서만 적용되도록 한다. 반면에 개발자 원칙에만 의존하는 것을 좋아하지 않는 사람들은 중첩된 스타일 같은 경우 네임스페이스 형식으로 사용할 수 있는 SASS와 같은 방식을 사용한다.  
+
+새로운 접근 방식은 CSS 모듈 또는 다양한 [CSS-in-JS](https://mxstbr.com/thoughts/css-in-js/) 라이브러리 중 하나를 사용하여 프로그래밍 방식으로 모든 스타일을 적용하는 것이다. 이렇게 함으로써 개발자가 의도한 위치에서만 스타일이 직접 적용될 수 있다. 또한 [Shaow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM) 은 (보다 플랫폼 기반의 접근하는 방식)을 지원하기 위해 스타일 격리도 제공한다.  
+
+개발자로서 서로 독립적으로 스타일을 작성할 수 있는 방법을 찾고 코드가 단일 응용 프로그램으로 함께 구성될 때, 예측 가능하게 동작할 것이라는 확신을 갖는 한 선택하는 접근 방식은 그다지 중용하지 않다고 할 수 있다.  
+
+## 공유 구성 요소 라이브러이  
+
+## 어플리케이션간 통신  
+
+## 백엔드 통신  
+
+## 테스트 
+
+## 자세한 예제 
+자바 스크립트를 사용해서 컨테이너 어플리케이션과 마이크로 프론트엔드가 함께 통합되는 방법에 초점을 맞춘 예제를 보여준다. 최종결과는 [여기](https://demo.microfrontends.com) 에서 라이브로 볼 수 있으며, 전체 [소스코드](https://github.com/micro-frontends-demo)를 참조한다.  
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/5ecd3960-e39e-49ea-aff7-1acf14bf8a23)  
+
+데모는 모두 React.js를 사용해서 구축되었다. 하지만 **React가 아니더라도 이 아키텍처를 적용할 수 있다**는 점을 강조한다.  마이크로 프론트앤드는 다양한 도구 또는 프레임워크로 구현될 수 있다. React를 선택한 이유는 단지 친숙하기 때문이다.  
+
+#### 컨테이너 
+사용자의 진입점인 컨테이너부터 시작한다. 아래의 package.json 파일을 보자.  
+```
+{
+  "name": "@micro-frontends-demo/container",
+  "description": "Entry point and container for a micro frontends demo",
+  "scripts": {
+    "start": "PORT=3000 react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test"
+  },
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "^2.1.8"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest-enzyme": "^6.0.2",
+    "react-app-rewire-micro-frontends": "^0.0.1",
+    "react-app-rewired": "^2.1.1"
+  },
+  "config-overrides-path": "node_modules/react-app-rewire-micro-frontends"
+}
+```
+
+React 및 
