@@ -91,6 +91,65 @@ tags:
 <일반적으로 페이지의 시각적 구조에서 아키텍처를 파생할 수 있다>  
 
 #### Server side template composition  
+각각 다른 앱에 맞는 HTML을 서비스 하는 서버를 backend에 두고, 요청한 URL에 따라 HTML을 writing 해주는 서버를 그 앞단에 놓아서 요청에 적합한  HTML을 응답으로 보내주는 구조이다.  
+```
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Feed me</title>
+  </head>
+  <body>
+    <h1>🍽 Feed me</h1>
+    <!--# include file="$PAGE.html" -->
+  </body>
+</html>
+```
+위 코드는 공통된 부분을 포함하고 있는 index.html 코드이다. 이 코드에는 서버 측의 Plug-in 페이지를 포함하고 있다.  
+이제, Nginx 서버를 사용한다고 가정하자. $PAGE라는 변수를 요청 URL에 따라서 다르게 매칭시킬 수 있다.  
+```
+server {
+    listen 8080;
+    server_name localhost;
+
+    root /usr/share/nginx/html;
+    index index.html;
+    ssi on;
+
+    # Redirect / to /browse
+    rewrite ^/$ http://localhost:8080/browse redirect;
+
+    # Decide which HTML fragment to insert based on the URL
+    location /browse {
+      set $PAGE 'browse';
+    }
+    location /order {
+      set $PAGE 'order';
+    }
+    location /profile {
+      set $PAGE 'profile'
+    }
+
+    # All locations should render through index.html
+    error_page 404 /index.html;
+}
+```
+
+위 방법은 상당피 일반적인 서버측 구성이다. 우리가 위 예시를 마이크로 프론트엔드라고 정당하게 부를 수 있는 이유는 각 조각이 독립적인 팀에서 제공할 수 있는 독립적인 도메인 개념을 나타내는 방식으로 도메인을 분할했기 때문이다.  
+위 코드는 단순한 것이지만, 각각 고유한 배포 파이프라인이 있다고 가정하여 다른 페이지에 영향을 미치지 않는 방향으로 어떤 페이지에 변경사항을 배포할 수 있다.  
+
+더 큰 독립성을 위해 각 마이크로 프론트엔드를 렌더링/제공하는 별도의 서버를 둘 수도 있으며 이 서버는 다른 서버들의 앞 단에 위치할 수 있다.  
+응답을 캐싱한다면 대기시간에 영향을 주지않고 서비스를 제공할 수 있을 것이다.  
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/d8fafe0a-09a3-4511-a387-5d838e8e93be)   
+
+위 예제는 마이크로 프론트엔드가 반드시 새로운 기술일필요도 없고, 복잡할 필요도 없음을 잘 보여준다. 어떤 설계 결정이 코드베이스와 팀의 자율성에 어떤 영향을 미치는지 주의를 기술이는 한, 기술 스택에 관계 없이 많은 동일한 이점을 얻을 수 있다.  
+
+최근의 웹 개발 기술과 매핑시켜보면, 특정 페이지 단위의 앱을 도메인별로 여러 개의 Nextjs 앱 서버에 배포해 놓고,
+앞 단에 basePath로 요청이 들어왔을 때에, 뒷 단의 Nextjs로 필요한 페이지를 요청하고 앞 단의 서버에서 이를 통합하는 방식을 생각해 볼 수 있다.  
+
+이 방법과 관련있는 솔루션으로 Nextjs의 multi-zones가 있다고 한다. Nextjs로 개발된 여러 개의 웹앱을 묶어서 배포하기 용이하게 만드는 방법이다.  
+vercel은 multi-zones를 마이크로 프론트엔드 아키텍처를 구현하는 방법으로 제시 (https://vercel.com/templates/next.js/microfrontends)하고 있지만,
+웹앱별 배포로 해결할 수 없는 문제는 해결하기 어려이 있다고 한다.  (https://maxkim-j.github.io/posts/runtime-integration-micro-frontends/) 참조.  
 
 #### Build time integration  
 
