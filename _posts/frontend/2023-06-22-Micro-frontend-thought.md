@@ -309,32 +309,7 @@ Webpack 5에서 제공되는 Module Fedration Plugin 이 이 방식에 해당되
 
 데모는 모두 React.js를 사용해서 구축되었다. 하지만 **React가 아니더라도 이 아키텍처를 적용할 수 있다**는 점을 강조한다.  마이크로 프론트앤드는 다양한 도구 또는 프레임워크로 구현될 수 있다. React를 선택한 이유는 단지 친숙하기 때문이다.  
 
-#### 컨테이너 
-사용자의 진입점인 컨테이너부터 시작한다. 아래의 package.json 파일을 보자.  
-```
-{
-  "name": "@micro-frontends-demo/container",
-  "description": "Entry point and container for a micro frontends demo",
-  "scripts": {
-    "start": "PORT=3000 react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test"
-  },
-  "dependencies": {
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "^2.1.8"
-  },
-  "devDependencies": {
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "jest-enzyme": "^6.0.2",
-    "react-app-rewire-micro-frontends": "^0.0.1",
-    "react-app-rewired": "^2.1.1"
-  },
-  "config-overrides-path": "node_modules/react-app-rewire-micro-frontends"
-}
-```
-
-React 및 
+> 이 Article이 쓰여진 년도를 보니 4년 전이다. 그래서 GIT에 들어가서 [소스코드](https://github.com/micro-frontends-demo) 를 보았는데, 사용된 기술이 좀 OLD한 것 같다.
+> 최근에는 Webpack 5의 Module Federation 방식을 적용하면서 개념적으로도 깔끔하고 코드를 보아도 이해하기가 쉽다.
+> 가능하면 Martin Flower의 글을 다 번역하고 싶었는데, 데모는 그럴 만한 가지를 잘 느끼지 못하겟다.
+> [소스코드](https://github.com/micro-frontends-demo)는 참조만 하는 것이 좋을 듯 하다.   
