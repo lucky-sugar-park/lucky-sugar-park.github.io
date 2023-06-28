@@ -12,3 +12,5 @@ tags:
 <br/>
 
 > 불현듯, Next.js + React Router 상에서 SPA (Single Page Application)을 어떻게 빌드하지? 하는 의문이 들었다.
+
+추후작성
