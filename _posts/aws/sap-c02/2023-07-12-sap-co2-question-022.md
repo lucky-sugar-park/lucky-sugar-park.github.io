@@ -33,5 +33,6 @@ D. Implement reserved concurrency at the Lambda function level to provide the re
   API throtting은 API로의 요청을 제어할 때에 사용할 수 있다. 적은 수의 클라이언트가 많은 (에러를 유발하는) 요청을 발생시키는 상황에서 유용하다.  
   API throtting을 API Gateway level에서 적용하면 하나의 클라이언트가 만드는 많은 수의 요청에 제한을 걸 수 있다. 이렇게 함으로써 에러의 수를 줄일 수 있다.  
   이 때에 클라이언트에게는 에러 메시지 없이 429번 코드를 보여줘야 한다. 이렇게 하면 고객에게 표시되는 에러의 수를 줄일 수 있다.  
-  https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html
+  https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html  
+  코드 429는 Too many request 임  
 </deatils>
