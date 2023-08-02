@@ -41,4 +41,5 @@ D. Create an Amazon ECS cluster and a service definition for the application. Cr
   이런 경우 ALB는 적합하지 않음  
   각 AZ마다 Elastic IP를 할당함  
   Create Amazon EC2 instances for the service. Create one Elastic IP address for each Availability Zone  
+  static port 이기 때문에 L7을 지원하는 ALB까지 적용할 필요가 없음  
 </deatils>
