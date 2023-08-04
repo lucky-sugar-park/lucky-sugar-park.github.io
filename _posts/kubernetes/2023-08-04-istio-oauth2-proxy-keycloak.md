@@ -119,12 +119,13 @@ service
   ##
   # type: LoadBalancer ==> AWS에서 제공하는 nlb를 적용할 경우에는 LoadBalancer를 적용함
   type: ClusterIP # 여기서는 istio ingressgateway를 적용할 것이므로 ClusterIP를 설정하였음 (nlb는 비용이 들어감)  
-...
+```
 
 5) 설치
    - ```helm install keycloak --createnamespace -n keycloak bitnami/keycloak -f values.yaml```
    - 정상적으로 설치되면 keycloak 접속 url과 관리자 계정/비번을 얼려주는 화면이 나타남
-   - ```kubectl get all -n keycloak``` 명령어를 수행해보면 pod, service, statefulset이 생성된 것을 볼 수 있음  
+   - ```kubectl get all -n keycloak``` 명령어를 수행해보면 pod, service, statefulset이 생성된 것을 볼 수 있음
+
 ```
 Keycloak can be accessed through the following DNS name from within your cluster:
     - keycloak.keycloak.svc.cluster.local
@@ -146,7 +147,7 @@ oauth2-proxy는 kubectl 도구를 이용해서 직접 설치 하였다.
 1) keycloak.yaml이라는 이름의 파일을 생성 (파일이름은 편한데로 하면 됨)
    - ```vi keycloak.yaml```
   
----
+```
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -208,7 +209,7 @@ spec:
   ports:
     - name: http
       port: 4180
----
+```
 
 2) oauth2-proxy를 설치한다
    - ```kubectl install -f oauth2-proxy.yaml```
