@@ -225,24 +225,3 @@ UI의 경우  Client (웹 브라우저)에서 필요한 UI Page를 동적으로 
 > 충분히 투자할 만한 가치가 있다고 생각한다.
 >
 > 머지 않은 미래에 정리가 되었으면 좋겠다.  
-
-    - Business UI component가 아닌 경우에는 Widget 단위까지 작게 정의할 수록 재사용이 좋아진다
-    - 확실히 좋은 아키텍처 이다 – 많이 전파해야 겠다![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/835619d4-76b9-478f-9138-de8b041972c8)
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
