@@ -36,18 +36,18 @@ istio + oauth2-proxy + keyclock의 사용자 인증 데이터 시퀀스는 아�
 ## 진행 순서
 테스트를 위한 환경 구성 진행 순서는 다음과 같다.  
 0. 전제조건  
-1. 설치
-1.1 istio 설치 (v1.18)
-1.2 Keycloak 설치 (v21.1)
-1.3 OAuth2-proxy 설치 (v7.4)
-1.4 Nginx 설치
-2. 설정
-2.1 istio ingressgateway에 Route rule 적용 (Gateway와 Virtual Service 생성)
-2.2 Keycloak 설정 (github과 google의 Oauth2 서비스를 위한 클라이언트 등록 포함)
-2.3 Oauth2-proxy와 keycloak 연결
-2.4 Istio와 Oauth2-proxy 연결
-2.5 Istio에 AuthorizationPolicy 적용
-3. 테스트
+1. 설치  
+1.1 istio 설치 (v1.18)  
+1.2 Keycloak 설치 (v21.1)  
+1.3 OAuth2-proxy 설치 (v7.4)  
+1.4 Nginx 설치  
+2. 설정  
+2.1 istio ingressgateway에 Route rule 적용 (Gateway와 Virtual Service 생성)  
+2.2 Keycloak 설정 (github과 google의 Oauth2 서비스를 위한 클라이언트 등록 포함)  
+2.3 Oauth2-proxy와 keycloak 연결  
+2.4 Istio와 Oauth2-proxy 연결  
+2.5 Istio에 AuthorizationPolicy 적용  
+3. 테스트  
 
 ## 전제조건 
 - Kubernetes cluster가 구성되어 있어야 함
@@ -72,7 +72,9 @@ istioclt 다운로드 및 설치
 - istioctl install -set profile=demo -y # 데모 프로파일로 설치
 - 네트워크에 문제가 없다면 1 ~ 2분 이내에 설치가 완료될 것인다.
 
-아래 목록 모두 9개의 프로파일을 제공하는데, 약간의 설치요소 차이가 있다 (설치 이후에 수정 가능하다) 
+아래 목록 모두 9개의 프로파일을 제공하는데, 약간의 설치요소 차이가 있다 (설치 이후에 수정 가능하다)  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/cbef154f-1cfa-422b-a6e0-d41971a6c700)  
+
 - ambient.yaml
 - default.yaml
 - demo.yaml
@@ -85,6 +87,9 @@ istioclt 다운로드 및 설치
 
  설치가 완료되면 pod, service, deployment, replicaset 등이 설치된다.  
  ```kubectl get all -n istio-system``` 명령어로 확인해 볼 수 있다 (기본적으로는 istio-system이라는 이름의 namespace로 설치된다)  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/7b3d9d56-daf7-4de7-a864-de7a357ecbaf)  
+  
+
 
 #### keycloak 설치  
 [여기](https://wlsdn3004.tistory.com/10)를 참조하였다.  
@@ -124,7 +129,10 @@ service
 5) 설치
    - ```helm install keycloak --createnamespace -n keycloak bitnami/keycloak -f values.yaml```
    - 정상적으로 설치되면 keycloak 접속 url과 관리자 계정/비번을 얼려주는 화면이 나타남
-   - ```kubectl get all -n keycloak``` 명령어를 수행해보면 pod, service, statefulset이 생성된 것을 볼 수 있음
+   - ```kubectl get all -n keycloak``` 명령어를 수행해보면 pod, service, statefulset이 생성된 것을 볼 수 있음  
+   - AWS에서 제공하는 NLB를 적용할 경우에는 LoadBalancer와 nlb를 설정 (여기에서는 istio ingressgateway를 적용할 예정이므로 설정하지 않음)
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/8a9f4daf-4c72-4297-b5c2-0e60798ef020)  
+
 
 ```
 Keycloak can be accessed through the following DNS name from within your cluster:
@@ -140,7 +148,9 @@ To access Keycloak from outside the cluster execute the following commands:
 3) Access the Administration Console using the following credentials:
    - echo Username: admin
    - echo Password: $(kubectl get secret --namespace keycloak keycloak -o jsonpath="{.data.admin-password}" | base64 -d)
-```
+```  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/442cce0d-d311-45be-bfb4-07c41d38d61e) 
+
 
 #### oauth2-proxy 설치
 oauth2-proxy는 kubectl 도구를 이용해서 직접 설치 하였다.
@@ -213,7 +223,10 @@ spec:
 
 2) oauth2-proxy를 설치한다
    - ```kubectl install -f oauth2-proxy.yaml```
-3) 설치가 완료되면 pod, service, deployment, replicaset이 생성된 것을 확인할 수 있다  
+3) 설치가 완료되면 pod, service, deployment, replicaset이 생성된 것을 확인할 수 있다
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/fba6f297-b132-4106-95c7-ed7c16da716b)  
+
 
 #### Nginx 설치
 nginx는 istio를 이용한 사용자 인증이 잘 동작하는지의 여부를 확인하기 위함이며, kubectl을 통해서 설치하였다.
@@ -258,7 +271,11 @@ spec:
 
 2) nginx 설치
    - ```kubectl install -f nginx.yaml```  
-3) 설치가 완료되면 pod, service, deployment, replicaset이 생성된 것을 확인할 수 있다.
+3) 설치가 완료되면 pod, service, deployment, replicaset이 생성된 것을 확인할 수 있다.  
+   (아래 그림에서는 oauth2-proxy와 동일한 namespace로 생성했기 때문에 동일 네임스페이스에서 검색된다)
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/182a5c20-f293-48f9-b144-ade0bddd9708)  
+
 
 ## 설정
 #### istio ingressgateway에 Route rule 적용 (Gateway와 Virtual Service 생성)
@@ -354,7 +371,10 @@ spec:
 
 성공적으로 설치되면 keycloak, nginx 네임스페이스에 VirtualService와 Gateway가 생성된다.  
 VirtualService와 Gateway는 ```kubectl get all -n keycloak```로 검색되지 않으며   
-```kubectl get VirtualSerivce -n keycloak```으로 명령해야 검색이 된다.
+```kubectl get VirtualSerivce -n keycloak```으로 명령해야 검색이 된다.  
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/19ca4316-3363-416f-8cb4-33045d6883cc)  
+
 
 #### keycloak 설정
 다음은 keycloak을 설정한다.  1) Test용 Realm을 하나 생성하고 2) Oauth2-proxy가 사용할 클라이언트를 생성한 후에  
@@ -364,22 +384,47 @@ Keycloak의 관리자용 상세 매뉴얼은 [공식 홈페이지](https://www.k
 1) Keycloak 관리자 로그인  
    - 웹 브라우저로 http://keycloak.example.com에 접속한다 (istio ingressgateway 설정에 의해서 keycloak 서비스에 접속됨)
    - 관리자 아이디와 비번을 입력하고 로그인을 수행함 (keycloak 설치 시에 values.yaml 파일에 설정했었던 아이비와 비번입력- admin/admin)
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/d3e282ba-d2ed-46c9-a0e4-31f98c2e804b)
+
+아래 그림은 관리자 로그인에 성공했을 때의 초기 화면이다  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/8ccb07eb-0d0c-43b8-8eb4-c2e78deec773)  
+
 2) 신규 realm 생성
    - realm 이름: mytest (편한 이름으로 하면 됨)
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/a1d302a2-906e-4f68-9f3a-a57e2de854f8)
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/a06e9432-1b02-40bd-8e24-62bd61f7ce26)  
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/6a4aac7b-1418-40ac-9c65-f1b831917cc4)  
+
 3) 클라이언트 생성
    - Oauth2-proxy가 keycloak에 접근할 때에 사용할 클라이언트를 생성한다.
      - client ID: 편한 이름으로 생성하면 됨
      - rootURL, HomeURL, valid redirect URI 등을 입력함 (특히 valid redirect URI는 사용자 인증에 성공하면 redirect해주는 URI이다)
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/1d16560b-fac4-4fea-9553-2f8c6c84f1ad)
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/4a8f4e04-9cc5-441e-be4e-8bf6f4f01bcb)  
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/e8812bfa-696a-4fe7-847a-80468adf833b)  
+
 4) 사용자 로그인 화면 옵션 설정
    - 사용자 로그인 화면에는 다양한 옵션이 있으며, Realm 별로 설정할 수 있다.   
    - 설정된 내용에 따라서, 해당 realm 에 해당하는 사용자의 로그인 화면이 달라진다.
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/10d5fb51-524a-44bc-9a72-34082ed06607)  
+
 5) 외부 Social IDP 설정
-   - 구글, github, facebook 등의 oauth2 IDP를 등록할 수 있음
-   - 여기에 등록된 Social IDP는 해당 Realm 사용자가 로그인 시에 로그인 화면에 링크로 표시된다.
+   - 구글, github, facebook 등의 oauth2 IDP를 등록할 수 있음  
+   - 여기에 등록된 Social IDP는 해당 Realm 사용자가 로그인 시에 로그인 화면에 링크로 표시된다.  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/3e3c5954-7fb7-4b59-ada2-9e6f124a08cc)
+
+아래의 그림은 구글로부터 사용자 인증을 위한 구글 IDP를 등록하는 예시이다  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/d6b841f9-c84f-4ddd-846b-cf5ec87d1df3)  
 
 #### Oauth2-proxy와 Keycloak 연결
 - Oauth2-proxy 설치시에 등록한 keycloak 정보에 의해서 연결됨. 정보가 잘못되면 oauth2-proxy 설치에 실패하므로 kubectl로 확인 가능함
 - 상세한 내용은 Oauth2-proxy 설치 부분을 참조한다.
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/23bf2bc8-ca9f-4163-ad12-f8cfef81792f)  
 
 #### istio와 Oauth2-proxy 연결
 istio가 설치된 namespace에서 istio라는 이름의 configmap 내에 extensionProvider로써 Oauth2-proxy를 등록해 주고 configmap을 업데이트 하면 됨
@@ -449,6 +494,10 @@ spec:
    - 이 때에 oauth2-proxy는 특정 realm과 특정 클라이언트로 keycloak에 로그인 화면을 요청하게 되므로 keycloak에 등록된 mytest라는 reaml 의 로그인 화면이 나타남
 2) 구글 또는 깃헙을 클릭한 후에 해당 로그인 화면에서 로그인 하면, 사용자 인증처리가 완료되며,
    사용자 화면은 nginx의 초기 화면으로 redirection 됨.
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/4c32bd8f-0366-4ef6-8875-97eb9ba49b81)  
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/37dae618-7bf9-4968-8e2c-a7dc85405b1f)  
 
 ## 에필로그  
 istio, oauth2-proxy, keycloak 관련해서 따로 따로 설명해 놓은 자료들은 제법 있었으나 kubernetes 환경에서 연결 및 동작을 설명하는 자료를 찾지 못했다.  
