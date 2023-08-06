@@ -48,6 +48,6 @@ I can handle frontend and backend technologies as belows
 - GCP, AWS (Low+ Level)
 
 You can see my detailed project histories at **[Linkinin](https://www.linkedin.com/in/insoo-park)**    
-I would like to post and share my concerns, my experience in here including algorithm, IT technology, my project and my code  
+I would like to post and share my concerns, my experience in here including algorithm, IT technology, my project and my code   
 
-You can find my resume at **[here](../files/resume.docx)**
+You can find my resume at **[here](../files/resume.docx)**  
