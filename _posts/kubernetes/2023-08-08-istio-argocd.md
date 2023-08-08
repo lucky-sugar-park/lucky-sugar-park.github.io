@@ -25,13 +25,14 @@ istio의 ingressgateway로 argocd-server 서비스를 (srcure ingress를 구축)
 발급된 인증서가 istio에 secret로 등록이 되어 있어야 한다.  
 (미리 등록하지 않을 경우에는 나중에 gateway를 생성할 때에 serverCertificate와 privateKey 파일을 yaml 파일에 등록해 줄 수도 있다)  
 다음과 같은 순서로 작업해야 한다.  
-<br/>
+<br/>  
+
 0. argocd namespace에 label 넣어주기  
 1. 도메인 인증서 발급 (cert 파일과 privateKey 파일이 있어야 함)  
-2. 인증서를 istio (namespace: Defauylt로는 istio-system)에 등록한다. 
-3. Argocd에 대한 Gateway와 VirtualService를 생성한다.  
-4. argocd-service pod의 구동 옵션에 --insecure를 넣어준다.  
-5. 웹 브라우저로 잡 접속되는지 확인한다.
+2. 인증서를 istio (namespace: Defauylt로는 istio-system)에 등록한다.  
+3. Argocd에 대한 Gateway와 VirtualService를 생성한다.   
+4. argocd-service pod의 구동 옵션에 --insecure를 넣어준다.   
+5. 웹 브라우저로 잡 접속되는지 확인한다. 
 
 #### 네임스페이스에 라벨 넣어주기  
 argocd namespcae에 다음과 같이 Label를 넣어준다.  
