@@ -18,7 +18,7 @@ tags:
 >
 > 때문에 외부로부터의 요청을 ingressgateway로 단일화하게 ingressgateway에서 요청 도메인 또는 URI 패턴 등에 근거하여  
 > 내부 서비스로 route하도록 구성할 수 있다.
->> istio를 활용하면, 이러한 일들은 손쉽게 처리할 수 있는데, 이번 글에서는 istio 기반으로 argocd 서비스를 연결하는 방법을 기술한다.
+> istio를 활용하면, 이러한 일들은 손쉽게 처리할 수 있는데, 이번 글에서는 istio 기반으로 argocd 서비스를 연결하는 방법을 기술한다.
 
 ## 작업순서 
 istio의 ingressgateway로 argocd-server 서비스를 (srcure ingress를 구축) 제공하기 위해서는 먼저 해당 도메인에 대한 인증서가 발급이 되어 있어야 하며, 
