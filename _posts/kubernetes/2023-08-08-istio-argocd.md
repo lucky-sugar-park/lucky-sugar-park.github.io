@@ -167,4 +167,5 @@ spec:
 
 ## 참조문서
 - [Secure ingress](https://istiobyexample.dev/secure-ingress/)  
-- [istio gateway tls 흐름](https://do-hansung.tistory.com/85)  
+- [istio gateway tls 흐름](https://do-hansung.tistory.com/85)
+- [공식문서-TLS Configuration](https://argo-cd.readthedocs.io/en/stable/operator-manual/tls/)
