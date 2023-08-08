@@ -166,5 +166,5 @@ spec:
 
 
 ## 참조문서
-- [Secure ingress] https://istiobyexample.dev/secure-ingress/  
+- [Secure ingress](https://istiobyexample.dev/secure-ingress/)  
 - [istio gateway tls 흐름](https://do-hansung.tistory.com/85)  
