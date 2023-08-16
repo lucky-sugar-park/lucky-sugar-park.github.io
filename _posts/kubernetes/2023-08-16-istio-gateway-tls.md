@@ -45,8 +45,9 @@ Argocd Gwateway를 생성하기 전에 Argocd가 Kubernetes Cluster에 설치되
 
 1. Gateway 생성
 Gateway는 ingressgateway에 특정 호스트이름과 포트 (80, 443 등)로 요청이 오면 Mapping 되는 virtual service로 route하도록 룰을 등록하기 위해서 생성한다고 생각하면 된다.
-아래의 예제는 argocd gateway를 생성하는 yaml 예제이다.
-<br/>
+아래의 예제는 argocd gateway를 생성하는 yaml 예제이다.  
+<br/>  
+
 ```
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
@@ -80,8 +81,9 @@ spec:
 Gateway에서 tls 모드를 SIMPLE로 설정했기 때문에 Virtual Service로 넘어오는 것은 HTTP 패킷만 넘어오게 된다.  
 (이는 Gateway에서 https에 필요한 Cert 인증과 Handshake를 모두 완료했기 때문이다-istio 공식문서에서는 이것을 tls termination이라고 부른다)   
 따라서 별도의 tls용 route를 설정할 필요는 없다.  
-아래의 코드를 참조한다
-<br/>
+아래의 코드를 참조한다  
+<br/>  
+
 ```
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -134,12 +136,14 @@ template:
 
 #### Kubernetes dashboard 설정
 Kubernetes-Dashboard Gwateway를 생성하기 전에 Kubernetes-Dashboard가 Kubernetes Cluster에 설치되어 있어야 한다.   
-설치 방법은 여러 가지가 있지만, 가장 간단하게는 ```kubectl apply -n kubernetes-dashboard -f [https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml](https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml)https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml``` 명령어를 통해서 설치할 수 있다 (namespace는 kubernetes-dashboard로 주었음)  
-<br/>
+설치 방법은 여러 가지가 있지만, 가장 간단하게는 ```kubectl apply -n kubernetes-dashboard -f [https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml](https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml)https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml``` 명령어를 통해서 설치할 수 있다 (namespace는 kubernetes-dashboard로 주었음)   
+<br/>  
+
 1. Gateway 생성
 Gateway는 ingressgateway에 특정 호스트이름과 포트 (80, 443 등)로 요청이 오면 Mapping 되는 virtual service로 route하도록 룰을 등록하기 위해서 생성한다고 생각하면 된다.  
-아래의 예제는 kubernetes-dashboard gateway를 생성하는 yaml 예제이다.
-<br/>
+아래의 예제는 kubernetes-dashboard gateway를 생성하는 yaml 예제이다.   
+<br/>  
+
 ```
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
@@ -165,13 +169,15 @@ spec:
       number: 443
       protocol: HTTPS
     tls:
-      mode: PASSTHROUGH # https 통신을 Kubernetes-dashboard 서버와 직접 할 수 있도록 PASSTHROUGH로 설정함  
-```
+      mode: PASSTHROUGH # https 통신을 Kubernetes-dashboard 서버와 직접 할 수 있도록 PASSTHROUGH로 설정함   
+```  
 <br/>
+
 2. Kubernetes-dashboard Virtual Service 생성  
 Gateway에서 http 포트의 httpsRedirect를 true로, tls 모드를 PASSTHROUGH로 설정했기 때문에 Virtual Service로 넘어오는 것은 HTTPS 패킷만 넘어오게 된다.  
 (이는 Kubernetes-Dashboard 서버와 클라이언트간 https에 필요한 Cert 인증과 Handshake를 직접 수행한다는 것을 의미한다)   
 아래의 코드를 참조한다   
+
 ```
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -204,6 +210,7 @@ spec:
           number: 443
 ```
 <br/>
+
 3. secret 생성  
 argocd 부분 참조 (argocd와 동일한 secret을 사용해도 상관 없음)   
 
@@ -212,14 +219,16 @@ argocd 부분 참조 (argocd와 동일한 secret을 사용해도 상관 없음)
 Kubernetes-Dashboard 같은 경우에는 HTTPS 방식만을 지원하기 때문에 서버 인증서를 Kubenetes-Dashboard 서버가 제공할 수 있어야 하며,  
 Cert 인증 후에 클라이언트 (웹 브라우저)와 tls handshake를 직접 처리해야 한다.  
 <br/>
+
 - 먼저 서버에서 인증서가 포함된 secret를 등록해야 한다. 기존에 등록된 "kubernetes-dashboard-certs"라는 이름의 secret를 제거한다   
   ```kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard```
 - 삭제한 secret과 동일한 이름으로 서버 인증서가 포함된 secret를 생성한다.
   ```kubectl create secret kubernetes-dashboard-certs -n kubernetes-dashboard --cert <cert file path> --key <key file path>```
 - Kubernetes-dashboard deployment에 key와 cert 정보를 추가해 준다.
   ```kubectl edit deployment kubernetes-dashboard -n kubernetes-dashboard```
-아래의 코드를 참조한다.
+아래의 코드를 참조한다.  
 <br/>
+
 ```
 apiVersion: apps/v1  
 ...  
