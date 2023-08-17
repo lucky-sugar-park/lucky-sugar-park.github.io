@@ -499,6 +499,14 @@ spec:
 
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/37dae618-7bf9-4968-8e2c-a7dc85405b1f)  
 
+## 추가정보
+1) Keycloak, Oauth2-proxy, nginx 모두 https로 서비스 하고자 할 경우에
+   - Ingressgateway를 통해서 서비스할 경우에는 keycloak과 nginx용으로 gateway와 virtualservice를 생성해 줘야 한다
+   - 생성하는 방법은 [여기](./2023-08-16-istio-gateway-tls.md) 를 참조한다
+2) 이 때에 Oauth2-proxy pod 생성시에 keycloak에 연결을 시도할 때에 (https로 통신할 경우에) keycloak의 인증서를 검증하고 tls 통신을 하게 되는데
+   - 인증서 검증이 꽤 까다롭다 (URL: keycloak.example.com까지 모두 일치해야 하고 Self signed CA인 경우 Unkonwn authority 에러롤 띄우면서 pod 생성이 안됨)
+   - Oauth2-proxy 구동 옵션 중에 --ssl-insecure-skip-verify를 추가함으로써 해결하였음
+
 ## 에필로그  
 istio, oauth2-proxy, keycloak 관련해서 따로 따로 설명해 놓은 자료들은 제법 있었으나 kubernetes 환경에서 연결 및 동작을 설명하는 자료를 찾지 못했다.  
 방법을 찾고 구성하는데에 꼬박 하루의 시간이 걸린 것 같다.  
