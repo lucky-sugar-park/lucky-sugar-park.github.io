@@ -94,19 +94,20 @@ istioclt 다운로드 및 설치
 #### keycloak 설치  
 [여기](https://wlsdn3004.tistory.com/10)를 참조하였다.  
 1) 네임스페이스 생성 (편의상 keycloak이라는 네임스페이스를 생성하였음)
-   - ``` kubectl create ns keycloak```
+   - ``` kubectl create ns keycloak```  
 2) keycloak 네임스페이스에 istio 적용
-   - ```kubectl label namespace keycloak istio-injection=enabled```
+   - ```kubectl label namespace keycloak istio-injection=enabled```  
 3) 헬름 리포지터리 등록
-   - ```helm repo add bitnami https://charts.bitnami.com/bitnami```
+   - ```helm repo add bitnami https://charts.bitnami.com/bitnami```  
    - keycloak 차트가 있는 헬름 리포지터리는 여러 곳이 있으며, 여기서는 bitnami를 사용하였음
 4) 설정 값 변경
    - helm ckart에서 정의한 values.yaml 파일 안의 내용을 변경하는 것임
-   - ```mkdir keycloak && cd keycloak```
-   - ```helm show values bitnami/keycloak > values.yaml```
-   - ```vi values.yaml```
-   - adminUser: "admin"과 adminPassword: "admin" 부분만 변경하였음 (keycloak 관리화면 접속시 필요함)
-```
+   - ```mkdir keycloak && cd keycloak```  
+   - ```helm show values bitnami/keycloak > values.yaml```  
+   - ```vi values.yaml```  
+   - adminUser: "admin"과 adminPassword: "admin" 부분만 변경하였음 (keycloak 관리화면 접속시 필요함)  
+<br/>
+```  
 ...
 auth:
   ## @param auth.adminUser Keycloak administrator user
@@ -124,20 +125,20 @@ service
   ##
   # type: LoadBalancer ==> AWS에서 제공하는 nlb를 적용할 경우에는 LoadBalancer를 적용함
   type: ClusterIP # 여기서는 istio ingressgateway를 적용할 것이므로 ClusterIP를 설정하였음 (nlb는 비용이 들어감)  
-```
+```  
 
 5) 설치
-   - ```helm install keycloak --createnamespace -n keycloak bitnami/keycloak -f values.yaml```
+   - ```helm install keycloak --createnamespace -n keycloak bitnami/keycloak -f values.yaml```  
    - 정상적으로 설치되면 keycloak 접속 url과 관리자 계정/비번을 얼려주는 화면이 나타남
    - ```kubectl get all -n keycloak``` 명령어를 수행해보면 pod, service, statefulset이 생성된 것을 볼 수 있음  
    - AWS에서 제공하는 NLB를 적용할 경우에는 LoadBalancer와 nlb를 설정 (여기에서는 istio ingressgateway를 적용할 예정이므로 설정하지 않음)
-![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/8a9f4daf-4c72-4297-b5c2-0e60798ef020)  
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/8a9f4daf-4c72-4297-b5c2-0e60798ef020)    
 
-
+<br/>
 ```
-Keycloak can be accessed through the following DNS name from within your cluster:
-    - keycloak.keycloak.svc.cluster.local
-To access Keycloak from outside the cluster execute the following commands:
+Keycloak can be accessed through the following DNS name from within your cluster:  
+    - keycloak.keycloak.svc.cluster.local  
+To access Keycloak from outside the cluster execute the following commands:  
 1) Get the Keycloak URL by running these commands:
    - NOTE: It may take a few minutes for the LoadBalancer IP to be available. (80)
         You can watch its status by running 'kubectl get --namespace keycloak svc -w keycloak'
@@ -155,8 +156,9 @@ To access Keycloak from outside the cluster execute the following commands:
 #### oauth2-proxy 설치
 oauth2-proxy는 kubectl 도구를 이용해서 직접 설치 하였다.
 1) keycloak.yaml이라는 이름의 파일을 생성 (파일이름은 편한데로 하면 됨)
-   - ```vi keycloak.yaml```
-  
+   - ```vi keycloak.yaml```  
+
+<br/><br/>
 ```
 ---
 apiVersion: apps/v1
@@ -284,8 +286,8 @@ spec:
 
 Gateway와 Virtual service는 (편의상) Route 대상이 되는 Nginx와 keycloak namespace에서 각각 설정하였다. (yaml 파일 참조)
 
-- keycloak-virtual-service.yaml  
-<br/>
+- keycloak-virtual-service.yaml   
+<br/><br/>  
 ```
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
@@ -321,9 +323,9 @@ spec:
     - destination:
         host: keycloak.keycloak.svc.cluster.local  
 ```
-
-- nginx-virtual-service.yaml  
-<br/>
+<br/><br/>
+- nginx-virtual-service.yaml  <br/>
+<br/><br/>
 ```
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
@@ -371,7 +373,7 @@ spec:
 
 성공적으로 설치되면 keycloak, nginx 네임스페이스에 VirtualService와 Gateway가 생성된다.  
 VirtualService와 Gateway는 ```kubectl get all -n keycloak```로 검색되지 않으며   
-```kubectl get VirtualSerivce -n keycloak```으로 명령해야 검색이 된다.  
+```kubectl get VirtualSerivce -n keycloak``` 으로 명령해야 검색이 된다.  
 
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/19ca4316-3363-416f-8cb4-33045d6883cc)  
 
