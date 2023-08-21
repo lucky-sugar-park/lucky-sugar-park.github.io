@@ -101,7 +101,8 @@ spec:
         - --skip-auth-strip-headers=false
         - --email-domain=*
         - --http-address=0.0.0.0:4180
-        - --upstream=http://nginx.dev.3d-excellence.com
+        #- --upstream=http://nginx.dev.3d-excellence.com
+        - --upstream=http://hello-nginx.nginx.svc.cluster.local
         - --skip-provider-button=true
         - --whitelist-domain=".dev.3d-excellence.com"
         - --cookie-domain=".dev.3d-excellence.com"
