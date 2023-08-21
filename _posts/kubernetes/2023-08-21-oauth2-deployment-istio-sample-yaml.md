@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes istio + oauth2-proxy + keycloak 구성시 oauth2-proxy deployment 예시"
-last_modified_at: 2023-08-16T10:05:02-05:00
+last_modified_at: 2023-08-21T15:43:02-05:00
 categories:
   - Blog
 tags:
