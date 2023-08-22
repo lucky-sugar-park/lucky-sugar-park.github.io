@@ -96,13 +96,13 @@ spec:
         - --cookie-expire=4h
         - --cookie-name=auth
         - --set-xauthrequest=true
-        - --pass-authorization-header=true
+        #- --pass-authorization-header=true => header 사이즈 초과 발생
         - --pass-access-token=true
-        - --set-authorization-header=true
+        #- --set-authorization-header=true => header 사이즈 초과발생
         - --skip-auth-strip-headers=false
         - --email-domain=*
         - --http-address=0.0.0.0:4180
-        #- --upstream=http://nginx.dev.3d-excellence.com
+        #- --upstream=http://nginx.dev.3d-excellence.com => 403 forbidden 발생 (외부 주소로 할 경우에는 auth 정보가 함께 전송되지 않기 때문)
         - --upstream=http://hello-nginx.nginx.svc.cluster.local
         - --skip-provider-button=true
         - --whitelist-domain=".dev.3d-excellence.com"
@@ -113,7 +113,7 @@ spec:
         - --redeem-url=https://keycloak.dev.3d-excellence.com/realms/mytest/protocol/openid-connect/token
         - --validate-url=https://keycloak.dev.3d-excellence.com/realms/mytest/protocol/openid-connect/userinfo
         - --cookie-domain=.3d-excellence.com
-        - --cookie-secret=isparkiskingoftheworld!!
+        - --cookie-secret=isparkiskingoftheworld!!  # base64로 인코딩 하는 것을 권장함 (그냥 plain text도 무관함)
         - --client-id=nginx
         - --client-secret=nginx
         - --ssl-insecure-skip-verify
