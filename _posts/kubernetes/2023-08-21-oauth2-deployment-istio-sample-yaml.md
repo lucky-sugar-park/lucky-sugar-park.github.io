@@ -46,8 +46,9 @@ spec:
             "@type": "type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager" # => v3일 경우 세팅
             max_request_headers_kb: 96 # 최대 96 kb이다.
 ```  
-<br>
-#### oauth2-proxy deployment yaml 세팅예시
+<br>  
+
+#### oauth2-proxy deployment yaml 세팅예시  
 header에 많은 정보를 담으면 좋겠지만, 데이터 량이 늘어남으로 네트워크 성능에 안좋은 영향을 미칠 수 있으며   
 무엇보다 istio envoy proxy 서버의 header 크기 제한에 걸려 에러를 유발할 수 있다.   
 아래는 (431 에러를 유발하는 예시이다 - 너무 많은 정보를 헤더에 담도록 세팅한 경우)    
