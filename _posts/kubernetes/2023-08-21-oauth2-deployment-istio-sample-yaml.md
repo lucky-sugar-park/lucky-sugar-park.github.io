@@ -102,6 +102,7 @@ spec:
         - --skip-auth-strip-headers=false
         - --email-domain=*
         - --http-address=0.0.0.0:4180
+        #- --upstream=static://200  => default setting (no size limit, 요청된 url로 upstream 함)
         #- --upstream=http://nginx.dev.3d-excellence.com => 403 forbidden 발생 (외부 주소로 할 경우에는 auth 정보가 함께 전송되지 않기 때문)
         - --upstream=http://hello-nginx.nginx.svc.cluster.local
         - --skip-provider-button=true
