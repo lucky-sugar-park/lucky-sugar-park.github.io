@@ -460,7 +460,7 @@ data:
         port: 80
         timeout: 1.5s
         includeHeadersInCheck: ["authorization", "cookie"]
-        headersToUpstreamOnAllow: ["x-forwarded-access-token", "authorization", "path", "x-auth-request-user", "x-auth-request-email", "x-auth-request-access-token"]
+        headersToUpstreamOnAllow: ["x-forwarded-access-token", "authorization", "path", "x-auth-request-user", "x-auth-request-email", "x-auth-request-access-token"] # 여기에 application으로 넘겨야 할 헤더 정보가 있으면 기술해 줘야 한다 (x-forwarded-access-token 헤더는 x_forwarded_access_token 이름으로 참조할 수 있음)
         headersToDownstreamOnDeny: ["content-type", "set-cookie"]
   meshNetworks: 'networks: {}'
 ```
