@@ -478,10 +478,10 @@ metadata:
 spec:
   selector:
     matchLabels:
-      istio: ingressgateway
+      istio: ingressgateway  # istio-ingressgateway deployment에는 app:istio-ingressgateway와 istio: ingressgateway가 모두 등록되어 있음
     action: CUSTOM
     provider:
-      name: nginx-oauth2-proxy  # ConfigMap에서 정의된 extensionProvider 이름
+      name: nginx-oauth2-proxy  # ConfigMap에서 정의된 extensionProvider 이름 (configmap에서 여러 개의 extensionProvider를 정의할 수 있으며, 그 중 하나를 선택함
     rules:
     - to:
       - operation:
