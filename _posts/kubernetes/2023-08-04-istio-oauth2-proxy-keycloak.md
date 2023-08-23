@@ -481,7 +481,7 @@ spec:
       istio: ingressgateway
     action: CUSTOM
     provider:
-      name: nginx-oauth2-proxy
+      name: nginx-oauth2-proxy  # ConfigMap에서 정의된 extensionProvider 이름
     rules:
     - to:
       - operation:
