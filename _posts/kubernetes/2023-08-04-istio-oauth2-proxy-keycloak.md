@@ -72,7 +72,7 @@ istioclt 다운로드 및 설치
 - istioctl install -set profile=demo -y # 데모 프로파일로 설치
 - 네트워크에 문제가 없다면 1 ~ 2분 이내에 설치가 완료될 것인다.
 
-아래 목록 모두 9개의 프로파일을 제공하는데, 약간의 설치요소 차이가 있다 (설치 이후에 수정 가능하다)  
+아래 목록 모두 9개의 프로파일을 제공하는데, 약간의 설치요소 차이가 있다 (설치 이후에 수정 가능하다)   
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/cbef154f-1cfa-422b-a6e0-d41971a6c700)  
 
 - ambient.yaml
@@ -85,8 +85,8 @@ istioclt 다운로드 및 설치
 - preview.yaml
 - remote.yaml
 
- 설치가 완료되면 pod, service, deployment, replicaset 등이 설치된다.  
- ```kubectl get all -n istio-system``` 명령어로 확인해 볼 수 있다 (기본적으로는 istio-system이라는 이름의 namespace로 설치된다)  
+ 설치가 완료되면 pod, service, deployment, replicaset 등이 설치된다.   
+ ```kubectl get all -n istio-system``` 명령어로 확인해 볼 수 있다 (기본적으로는 istio-system이라는 이름의 namespace로 설치된다)    
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/7b3d9d56-daf7-4de7-a864-de7a357ecbaf)  
   
 
@@ -105,9 +105,11 @@ istioclt 다운로드 및 설치
    - ```mkdir keycloak && cd keycloak```  
    - ```helm show values bitnami/keycloak > values.yaml```  
    - ```vi values.yaml```  
-   - adminUser: "admin"과 adminPassword: "admin" 부분만 변경하였음 (keycloak 관리화면 접속시 필요함)  
-<br/>
-```  
+   - adminUser: "admin"과 adminPassword: "admin" 부분만 변경하였음 (keycloak 관리화면 접속시 필요함)   
+  
+<br/>   
+
+```   
 ...
 auth:
   ## @param auth.adminUser Keycloak administrator user
@@ -125,16 +127,18 @@ service
   ##
   # type: LoadBalancer ==> AWS에서 제공하는 nlb를 적용할 경우에는 LoadBalancer를 적용함
   type: ClusterIP # 여기서는 istio ingressgateway를 적용할 것이므로 ClusterIP를 설정하였음 (nlb는 비용이 들어감)  
-```  
+```    
 
-5) 설치
-   - ```helm install keycloak --createnamespace -n keycloak bitnami/keycloak -f values.yaml```  
-   - 정상적으로 설치되면 keycloak 접속 url과 관리자 계정/비번을 얼려주는 화면이 나타남
-   - ```kubectl get all -n keycloak``` 명령어를 수행해보면 pod, service, statefulset이 생성된 것을 볼 수 있음  
+5) 설치   
+   - ```helm install keycloak --createnamespace -n keycloak bitnami/keycloak -f values.yaml```   
+   - 정상적으로 설치되면 keycloak 접속 url과 관리자 계정/비번을 얼려주는 화면이 나타남  
+   - ```kubectl get all -n keycloak``` 명령어를 수행해보면 pod, service, statefulset이 생성된 것을 볼 수 있음    
    - AWS에서 제공하는 NLB를 적용할 경우에는 LoadBalancer와 nlb를 설정 (여기에서는 istio ingressgateway를 적용할 예정이므로 설정하지 않음)
+   
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/8a9f4daf-4c72-4297-b5c2-0e60798ef020)    
 
-<br/>
+<br/>   
+
 ```
 Keycloak can be accessed through the following DNS name from within your cluster:  
     - keycloak.keycloak.svc.cluster.local  
@@ -150,7 +154,8 @@ To access Keycloak from outside the cluster execute the following commands:
    - echo Username: admin
    - echo Password: $(kubectl get secret --namespace keycloak keycloak -o jsonpath="{.data.admin-password}" | base64 -d)
 ```  
-![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/442cce0d-d311-45be-bfb4-07c41d38d61e) 
+
+![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/442cce0d-d311-45be-bfb4-07c41d38d61e)   
 
 
 #### oauth2-proxy 설치
@@ -352,7 +357,8 @@ spec:
   hosts:
   - "nginx.example.com"
   gateways:
-  - nginx-gateway
+  - nginx-gateway  # virtualservice와 네임스페이스가 동일할 경우에는 네임스페이스 생략 가능 (동일하지 않으면 namespace/gatewayname)
+  - mesh  # 원하는 만큼 gateway를 줄 수 있으며, mesh라고 입력하면 mesh내의 모든 sidecar에 적용된다
   http:
 - match:
     - uri:
