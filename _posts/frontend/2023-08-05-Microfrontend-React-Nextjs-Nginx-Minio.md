@@ -108,78 +108,81 @@ UI의 경우  Client (웹 브라우저)에서 필요한 UI Page를 동적으로 
 (최초 프로젝트는 ```npx create-mf-app common``` 명령어로 생성하였으나, 기존 프로젝트를 활용할 때는 불필요)  
 
 1) pilot이라는 디렉토리 생성 및 pilot 디렉토리로 이동  
-2) 소스코드 다운로드: ```git clone https://github.com/micro-frontend-pilot/common.git```  
-3) 설치  
+2) 소스코드 다운로드: ```git clone https://github.com/micro-frontend-pilot/common.git```
+3) 소스코드 링크: [소스코드](https://github.com/micro-frontend-pilot/common)
+4) 설치  
    - 디렉토리 이동: ```cd common```  
    - 설치: ```npm install –save```  
    - 필요한 라이브러리를 다운로드 하지 못한다면 사내 프록시나 방화벽 점검 필요  
-4) Micro frontend 컴포넌트 컴파일  
+5) Micro frontend 컴포넌트 컴파일  
    - ```npm run build``` 명령어 수행 (package.json 파일에 정의된 스크립트 이름)  
    - 빌드결과는 dist라는 이름의 디렉토리에 생성됨  
-5) Micro frontend 컴포넌트 업로드 (To Minio)  
+6) Micro frontend 컴포넌트 업로드 (To Minio)  
    - 웹 브라우저로 ```http://localhost:9000``` 접속 후에 Pilot이라는 이름의 Bucket 생성하고 common Path 생성 후에 dist 디렉토리에 있는 모든 파일을 업로드 함  
 
-6) webpck.config.js 설명
+7) webpck.config.js 설명
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/ec93ca3f-9052-4b08-99d9-1fe769839bc6)
 
-7) package.json 설명
+8) package.json 설명
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/a56ecdd1-afc4-433b-993b-17e4cc18351f)
 
-8) Minio에 업로드된 결과
+9) Minio에 업로드된 결과
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/bcc450d0-f6e9-46fc-9ea5-a3a1eaa9e304)
 
 #### biz-next 프로젝트  
 최초 프로젝트는 ```npx create-next-app biz-next``` 명령어로 생성하였으나, 기존 소스코드를 활용할 때에는 설치하기만 하면 됨  
 1) 생성된 pilot이라는 디렉토리로 이동 (없으면 디렉토리 생성)  
-2) 소스코드 다운로드: ```git clone https://github.com/micro-frontend-pilot/biz-next.git```  
-3) 설치
+2) 소스코드 다운로드: ```git clone https://github.com/micro-frontend-pilot/biz-next.git```
+3) 소스코드 링크: [소스코드](https://github.com/micro-frontend-pilot/biz-next)
+4) 설치
    - 디렉토리 이동: ```cd biz-next```
    - 설치: ```npm install –save```
    - 필요한 라이브러리를 다운로드 하지 못한다면 사내 프록시나 방화벽 점검 필요
-4) next.config.js 파일 수정
+5) next.config.js 파일 수정
    - Remote Host로 (Container 프로젝트) 노출할 Micro frontend Component 정의
    - Common Component로부터 Copyright 재사용을 위한 remote Component 정의
-5) Next 서버 구동
+6) Next 서버 구동
    - npm run dev 명령어 수행 (package.json 파일에 정의된 스크립트 이름)
    - .next/static이라는 디렉토리에 외부로 노출할 Micro frontend component가 저장됨 (remoteEntry.js)을 확인함
 
-6) package.json 설명
+7) package.json 설명
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/5b97832f-0d9f-4098-a6c1-19b8d72d11b4)
 
-7) next.config.js 설명  
+8) next.config.js 설명  
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/c482d677-5b35-4dc5-9275-dbf86f686510)
 
-8) Next에서 동적으로 공통 컴포넌트를 가져오는 방법
+9) Next에서 동적으로 공통 컴포넌트를 가져오는 방법
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/8681f9d5-6bde-4c56-bcf0-f82c3ac8e05f)
 
-9) 서버 구동결과  
+10) 서버 구동결과  
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/2bba51ec-0e0f-4ff1-8ade-55e4ef7f85cf)
 
 #### Container 프로젝트  
 최초 프로젝트는 ```npx create-mf-app container``` 명령어로 생성하였으나, 기존 소스코드를 활용할 때에는 설치하기만 하면 됨  
 1) 생성된 pilot이라는 디렉토리로 이동 (없으면 디렉토리 생성)
 2) 소스코드 다운로드: ```git clone https://github.com/micro-frontend-pilot/container.git```  
-3) 설치
+3) 소스코드 링크: [소스코드](https://github.com/micro-frontend-pilot/container)  
+4) 설치
    - 디렉토리 이동: ```cd container```
    - 설치: ```npm install –save```
    - 필요한 라이브러리를 다운로드 하지 못한다면 사내 프록시나 방화벽 점검 필요
-4) webpack.config.js 파일 수정
+5) webpack.config.js 파일 수정
    - Common Component로부터 Copyright 재사용을 위한 remote Component 정의
    - biz-next Component로부터 UserList 재사용을 위한 remote Component 정의
-5) Remote로부터 Micro frontend Component 재사용 방식의 코딩
-6) container 서버 구동
+6) Remote로부터 Micro frontend Component 재사용 방식의 코딩
+7) container 서버 구동
    - ```npm run start``` 명령어 수행 (package.json 파일에 정의된 스크립트 이름)
 
-7) package.json 설명  
+8) package.json 설명  
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/125a0767-c1ff-41d0-baa1-85845747e6db)
 
-8) webpack.config.js 설명  
+9) webpack.config.js 설명  
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/00f01333-302c-47e4-b910-13d5bb1426e1)
 
-9) React에서 Remote Component import 하는 방법
+10) React에서 Remote Component import 하는 방법
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/cd89c066-29ba-4025-8b3d-d2b5659f3ceb)
 
-10) 서버 구동결과
+11) 서버 구동결과
 ![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/be57fa6b-c4c6-450a-8dc9-dd880c4fe11e)
 
 #### 테스트 및 동작확인  
