@@ -108,7 +108,7 @@ UI의 경우  Client (웹 브라우저)에서 필요한 UI Page를 동적으로 
 (최초 프로젝트는 ```npx create-mf-app common``` 명령어로 생성하였으나, 기존 프로젝트를 활용할 때는 불필요)  
 
 1) pilot이라는 디렉토리 생성 및 pilot 디렉토리로 이동  
-2) 소스코드 다운로드: ```git clone <git repository 주소>```  
+2) 소스코드 다운로드: ```git clone https://github.com/micro-frontend-pilot/common.git```  
 3) 설치  
    - 디렉토리 이동: ```cd common```  
    - 설치: ```npm install –save```  
@@ -131,7 +131,7 @@ UI의 경우  Client (웹 브라우저)에서 필요한 UI Page를 동적으로 
 #### biz-next 프로젝트  
 최초 프로젝트는 ```npx create-next-app biz-next``` 명령어로 생성하였으나, 기존 소스코드를 활용할 때에는 설치하기만 하면 됨  
 1) 생성된 pilot이라는 디렉토리로 이동 (없으면 디렉토리 생성)  
-2) 소스코드 다운로드: ```git clone <git repository 주소>```  
+2) 소스코드 다운로드: ```git clone https://github.com/micro-frontend-pilot/biz-next.git```  
 3) 설치
    - 디렉토리 이동: ```cd biz-next```
    - 설치: ```npm install –save```
@@ -158,7 +158,7 @@ UI의 경우  Client (웹 브라우저)에서 필요한 UI Page를 동적으로 
 #### Container 프로젝트  
 최초 프로젝트는 ```npx create-mf-app container``` 명령어로 생성하였으나, 기존 소스코드를 활용할 때에는 설치하기만 하면 됨  
 1) 생성된 pilot이라는 디렉토리로 이동 (없으면 디렉토리 생성)
-2) 소스코드 다운로드: ```git clone <git repository 주소>```  
+2) 소스코드 다운로드: ```git clone https://github.com/micro-frontend-pilot/container.git```  
 3) 설치
    - 디렉토리 이동: ```cd container```
    - 설치: ```npm install –save```
