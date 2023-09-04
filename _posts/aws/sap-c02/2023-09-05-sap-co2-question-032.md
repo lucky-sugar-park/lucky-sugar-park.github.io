@@ -53,4 +53,5 @@ D. Add an explicit deny statement using a wildcard to the end of the SCP.
   <br/>
   뭐가 답인지 정확히 모르겠음    
   <br/>
+  참조할만한 글: https://taehyeki.tistory.com/379   
 </deatils>
