@@ -25,7 +25,7 @@ prometheus에서는 prometheus.io/scrape 어노테이션의 값이 true인 pod�
 주소는 /stats/prometheus이고 포트는 15020으로 자동 할당된다.   
 
 #### Istio와 Prometheus 설치 방식   
-Istio는 istioctl을 통해서 profile=demo로 설치를 진행했었고, Istio 공식 문서에 있는 [Prometheus 설치가드](https://istio.io/latest/docs/ops/integrations/prometheus/)에 따라   
+Istio는 istioctl을 통해서 profile=demo로 설치를 진행했었고, Istio 공식 문서에 있는 [Prometheus 설치가이드](https://istio.io/latest/docs/ops/integrations/prometheus/)에 따라   
 설치 하였다 (```kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.18/samples/addons/prometheus.yaml```)   
 - istio 버전: 1.18, prometheus 버전: 2.41.0
 
