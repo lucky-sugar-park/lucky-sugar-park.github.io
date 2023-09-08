@@ -117,8 +117,9 @@ secret 설정은 ```kubectl create secret <secert name> tls -n <namespace-istio�
 
 4. Argocd 설정변경  
 Argocd 같은 경우에는 기본적으로 HTTPS 방식을 지원한다.  때문에 HTTP 방식으로 접근하기 위해서는 서버 시작 시에 옵션을 줘야 한다.   
-아래의 코드를 참조한다.
+아래의 코드를 참조한다.   
 <br/>
+
 ```
 template:  
   metadata:  
@@ -136,7 +137,7 @@ template:
 
 #### Kubernetes dashboard 설정
 Kubernetes-Dashboard Gwateway를 생성하기 전에 Kubernetes-Dashboard가 Kubernetes Cluster에 설치되어 있어야 한다.   
-설치 방법은 여러 가지가 있지만, 가장 간단하게는 ```kubectl apply -n kubernetes-dashboard -f [https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml](https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml)https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml``` 명령어를 통해서 설치할 수 있다 (namespace는 kubernetes-dashboard로 주었음)   
+설치 방법은 여러 가지가 있지만, 가장 간단하게는 ```kubectl apply -n kubernetes-dashboard -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml ``` 명령어를 통해서 설치할 수 있다 (namespace는 kubernetes-dashboard로 주었음)   
 <br/>  
 
 1. Gateway 생성
