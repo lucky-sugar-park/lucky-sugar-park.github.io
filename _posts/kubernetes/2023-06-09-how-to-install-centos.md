@@ -11,10 +11,10 @@ tags:
 
 centos 7 기준   
 > 참고한 내용
-- https://javacan.tistory.com/entry/k8s-install-in-centos7   
-- https://gruuuuu.github.io/cloud/k8s-install/#   
-- https://ohoroyoi.tistory.com/150   
-- https://medium.com/finda-tech/overview-8d169b2a54ff   
+> - https://javacan.tistory.com/entry/k8s-install-in-centos7   
+> - https://gruuuuu.github.io/cloud/k8s-install/#   
+> - https://ohoroyoi.tistory.com/150   
+> - https://medium.com/finda-tech/overview-8d169b2a54ff   
 
 1. 설치 준비사항   
 1.1 hostname 설정   
@@ -28,77 +28,96 @@ centos 7 기준
     - yum install -y yum-utils device-mapper-persistent-data lvm2   
     - yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo   
     - yum install docker-ce   
-    - when The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled) error  
-      ```
-      # cat << EOF > /etc/docker/daemon.json  
-      {  
-         "exec-opts": ["native.cgroupdriver=systemd"]  
-      }  
-      EOF  
-      # systemctl restart docker  
-      # systemctl start docker && systemctl enable docker  
-      ```
-1.3 방화벽 설정(비 활성화)  
-    ```
-    # systemctl stop firewalld  
-    # systemctl disable firewalld  
-    # systemctl status firewalld  
-    ```
-1.4  Update Iptables Settings (M,N)  
-    ```
-    # cat <<EOF >  /etc/sysctl.d/k8s.conf  
-      net.bridge.bridge-nf-call-ip6tables = 1  
-      net.bridge.bridge-nf-call-iptables = 1  
-      EOF   
-    #sysctl --system  
-    ```
-    - net.bridge.bridge-nf-call-iptables = 1 의 의미 :  
-      centOS와 같은 리눅스 배포판은 net.bridge.bridge-nf-call-iptables의 default값이 0이다.  
-      이는 bridge 네트워크를 통해 송수신 되는 패킷이 iptable 설정을 우회한다는 의미.  
-      하지만 컨테이너의 네트워크 패킷이 호스트머신의 iptable 설정에 따라 제어되도록 하는 것이 바람직하며, 이를 위해서는 값을 1로 설정해야한다.  
-1.5 Disable SELinux (M,N)  
-    ```
-    # setenforce 0  
-    # sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config  
-    ```
-    - SELinux는 Linux의 보안을 강화해주는 보안 커널이며, application의 취약점으로 인한 해킹을 방지해주는 핵심 구성 요소입니다.  
-      총 세가지 모드가 있습니다.  
-      enforce (Default) : SELinux의 rule에 어긋나는 operation은 거부  
-      permissive : rule에 어긋나는 동작이 있을 경우 audit log를 남기고 operation은 허용  
-      disable : 제한없음  
-      production서버일 경우 SELinux를 끄기 보다는 서비스가 SELinux하에서 잘 동작하도록 하는것이 바람직하며, 개발서버일 경우 Permissive모드로 진행하다가 추후에 enforce모드로 전환하는것이 편합니다.  
-1.6 Disable SWAP (M,N)  
-    - swapoff -a  
-    - vim /etc/fstab
-      # 아래 부분을 찾아서 주석처리 해줍니다.  
-      # LABEL=SWAP-xvdb1 swap swap defaults    0 0 
-      #/dev/mapper/centos-swap swap                    swap    defaults        0 0
-      $ reboot  
+    - when The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled) error
+      
+```
+# cat << EOF > /etc/docker/daemon.json  
+{  
+   "exec-opts": ["native.cgroupdriver=systemd"]  
+}  
+EOF  
+# systemctl restart docker  
+# systemctl start docker && systemctl enable docker  
+```
+      
+1.3 방화벽 설정(비 활성화)    
+```
+# systemctl stop firewalld  
+# systemctl disable firewalld  
+# systemctl status firewalld    
+```  
+    
+1.4  Update Iptables Settings (M,N)    
+```
+# cat <<EOF >  /etc/sysctl.d/k8s.conf  
+  net.bridge.bridge-nf-call-ip6tables = 1  
+  net.bridge.bridge-nf-call-iptables = 1   
+  EOF   
+#sysctl --system   
+```   
+   
+- net.bridge.bridge-nf-call-iptables = 1 의 의미 :  
+  centOS와 같은 리눅스 배포판은 net.bridge.bridge-nf-call-iptables의 default값이 0이다.  
+  이는 bridge 네트워크를 통해 송수신 되는 패킷이 iptable 설정을 우회한다는 의미.  
+  하지만 컨테이너의 네트워크 패킷이 호스트머신의 iptable 설정에 따라 제어되도록 하는 것이 바람직하며, 이를 위해서는 값을 1로 설정해야한다.
+  
+1.5 Disable SELinux (M,N)   
+```
+# setenforce 0  
+# sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config  
+```
+
+- SELinux는 Linux의 보안을 강화해주는 보안 커널이며, application의 취약점으로 인한 해킹을 방지해주는 핵심 구성 요소입니다.  
+  총 세가지 모드가 있습니다.  
+  enforce (Default) : SELinux의 rule에 어긋나는 operation은 거부  
+  permissive : rule에 어긋나는 동작이 있을 경우 audit log를 남기고 operation은 허용  
+  disable : 제한없음  
+  production서버일 경우 SELinux를 끄기 보다는 서비스가 SELinux하에서 잘 동작하도록 하는것이 바람직하며, 개발서버일 경우 Permissive모드로 진행하다가 추후에 enforce모드로 전환하는것이 편합니다.  
+
+1.6 Disable SWAP (M,N)   
+```
+- swapoff -a  
+- vim /etc/fstab
+  # 아래 부분을 찾아서 주석처리 해줍니다.  
+  # LABEL=SWAP-xvdb1 swap swap defaults    0 0 
+  #/dev/mapper/centos-swap swap                    swap    defaults        0 0
+  $ reboot  
+```
+
 2. kubernetes 설치  
-2.1 Kubernetes Repo 추가 (M,N)  
-    - cat <<EOF > /etc/yum.repos.d/kubernetes.repo  
-      [kubernetes]  
-      name=Kubernetes  
-      baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64  
-      enabled=1  
-      gpgcheck=1  
-      repo_gpgcheck=1  
-      gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg  
-      exclude=kube*   
-      EOF
+2.1 Kubernetes Repo 추가 (M,N)
+```
+- cat <<EOF > /etc/yum.repos.d/kubernetes.repo  
+  [kubernetes]  
+  name=Kubernetes  
+  baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64  
+  enabled=1  
+  gpgcheck=1  
+  repo_gpgcheck=1  
+  gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg  
+  exclude=kube*   
+  EOF
+```
+
 2.2 kubelet, kubeadm, kubectl 설치 (M,N)  
-    - yum install -y kubelet-1.18.8* kubeadm-1.18.8* kubectl-1.18.8* --disableexcludes=kubernetes  
-    - yum install -y kubelet-1.17.11* kubeadm-1.17.11* kubectl-1.17.11* --disableexcludes=kubernetes  
-    - yum install -y kubelet-1.15.12* kubeadm-1.15.12* kubectl-1.15.12* --disableexcludes=kubernetes  
-    - systemctl enable kubelet && systemctl start kubelet 
+```
+- yum install -y kubelet-1.18.8* kubeadm-1.18.8* kubectl-1.18.8* --disableexcludes=kubernetes  
+- yum install -y kubelet-1.17.11* kubeadm-1.17.11* kubectl-1.17.11* --disableexcludes=kubernetes  
+- yum install -y kubelet-1.15.12* kubeadm-1.15.12* kubectl-1.15.12* --disableexcludes=kubernetes  
+- systemctl enable kubelet && systemctl start kubelet
+```
+
 2.3 cgroupfs 관련 문제 
     1) docker가 systemd를 사용하도록 설정  
-       - cat << EOF > /etc/docker/daemon.json  
-         {  
-           "exec-opts": ["native.cgroupdriver=systemd"]  
-         }  
-         EOF  
-         -> docker 서비스 재시작: systemctl restart docker  
+```
+- cat << EOF > /etc/docker/daemon.json  
+   {  
+     "exec-opts": ["native.cgroupdriver=systemd"]  
+   }  
+   EOF  
+   -> docker 서비스 재시작: systemctl restart docker
+```
+
      2) 또는 update kubelet to use cgroupfs
         - sed -i -E 's/--cgroup-driver=systemd/--cgroup-driver=cgroupfs/' /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
         - systemctl restart kubelet.service   
