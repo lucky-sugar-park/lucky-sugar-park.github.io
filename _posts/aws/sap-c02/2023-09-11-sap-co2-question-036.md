@@ -36,6 +36,8 @@ D. Configure replication on the S3 bucket in us-east-1 to replicate objects to t
   가장 operational overhead가 적은 것을 선택하는 것임.   
   D의 경우 어플리케이션 코드를 수정해야 함.   
   https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html 참조  
-  위 문서에 의하면 CloudFront는 S3 bucket을 Primary와 Secondary로 지정할 수 있으며, 문제 발생 시에 자동으로 Failover 됨
+  위 문서에 의하면 CloudFront는 S3 bucket을 Primary와 Secondary로 지정할 수 있으며, 문제 발생 시에 자동으로 Failover 됨   
+
+  [그림참조](https://docs.aws.amazon.com/images/AmazonCloudFront/latest/DeveloperGuide/images/origingroups-overview.png)
   <br/>
 </deatils>
