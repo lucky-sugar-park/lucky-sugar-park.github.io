@@ -13,11 +13,11 @@ The company migrated part of its Windows-based workload to AWS and needs the dat
 The company already has established an AWS Direct Connect connection between the on-premises network and AWS.   
 Which data migration strategy should the company use?   
 <br/>
-A. Use the file gateway option in AWS Storage Gateway to replace the existing Windows file server, and point the existing file share to the new file gateway.
+A. Use the file gateway option in AWS Storage Gateway to replace the existing Windows file server, and point the existing file share to the new file gateway.  
 <br/>
-B. Use AWS DataSync to schedule a daily task to replicate data between the on-premises Windows file server and Amazon FSx.
+B. Use AWS DataSync to schedule a daily task to replicate data between the on-premises Windows file server and Amazon FSx.  
 <br/>
-C. Use AWS Data Pipeline to schedule a daily task to replicate data between the on-premises Windows file server and Amazon Elastic File System (Amazon EFS).   
+C. Use AWS Data Pipeline to schedule a daily task to replicate data between the on-premises Windows file server and Amazon Elastic File System  (Amazon EFS).   
 <br/>
 D. Use AWS DataSync to schedule a daily task to replicate data between the on-premises Windows file server and Amazon Elastic File System (Amazon EFS).   
 <br/>
