@@ -23,32 +23,37 @@ service ssh restart
 4. worker3
    10.0.2.9, 10.0.3.15, 192.168.52.118 => no used
 
+```  
 // ip 주소확인
 ifconfig, ip addr, hostname -i
 
-
-#### microk8s 명령어 ####
+// microk8s 명령어
 microk8s kubectl ~~
+```  
 
-#### github token #### 
+// github token ####   
 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
 
-#### hostname  변경하는 방법 ####
+```  
+// hostname  변경하는 방법  
 hostnamectl set-hostname abc
+```  
 
-apt-get proxy
-##########
+``` apt-get proxy ```  
+
 설치 시에 프락시 설정을 하면 /etc/apt/apt.conf.d/90curtin-apiproxy에 기록됨
 주석을 제거하거나 살리면 됨
 Acquire::http::Proxy "http://username:password@70.10.15.10:8080/";
 Acquire::https::Proxy "https://username:password@70.10.15.10:8081/";
 
-#######
+//  
 root 계정 비밀번호 지정
 sudo passwd root
 비번 입력
-위와 같이 해야 su -가 먹는다.
+위와 같이 해야 su -가 먹는다.  
+//  
 
+```   
 ubuntu proxy 설정 (특정유저)
 vi ~/.bashrc
 export http_proxy=70.10.15.10:8080
@@ -57,8 +62,10 @@ export ftp_proxy=70.10.15.10:8080
 export no_proxy=70.10.15.10:8080
 
 source ~/.bashrc
-
-모든 유저
+```
+   
+```
+// 모든 유저
 vi /etc/environment
 http_proxy="http://70.10.15.10:8080/"
 https_proxy="http://70.10.15.10:8082"
@@ -69,13 +76,16 @@ apt를 위한 proxy 설정 (advanced packaging tool)
 vi /etc/apt/apt.conf.d/apt.conf
 Acquire::http::Proxy "http://username:password@70.10.15.10:8080/";
 Acquire::https::Proxy "https://username:password@70.10.15.10:8081/";
+```  
 
-#######
+// 
 httpie 설치
 tree 설치
 ifconfig 설치 (net-tools)
-docker 설치
+docker 설치 
+// 
 
+```   
 /etc/netplan/00~
 network:
   ethernets:
@@ -87,23 +97,27 @@ network:
       gateway4: 192.168.56.1
       nameservers:
         addresses: [203.241.132.85,204.241.135.135]
-  version: 2
+  version: 2  
+```   
 
 win+r > 실행 > \\59.29.225.161
 
 win+r > 실행 > cmd > ipconfig
 
-id: worker1
-pw: ubuntu
+id: worker1   
+pw: ubuntu  
 
-우분투 > 바탕화면 > 우클릭 > open terminal
+우분투 > 바탕화면 > 우클릭 > open terminal   
+
+```   
 # su -
 pw: ubuntu
 # ip a
 # ping google.com
+```  
 
-### putty 설정
-
+// putty 설정  
+```  
 - category > terminal > keyboard > the backspace key > control-H
 - category > terminal > bell > none
 - category > window > 20000
@@ -111,10 +125,10 @@ pw: ubuntu
 - category > session > hostname: 192.168.137.101
 - category > session > saved session > k8s > save
 - login as: root
-- password: ubuntu
-
-### chroot 실습
-
+- password: ubuntu  
+```  
+#### chroot 실습  
+```  
 # chroot --version
 # mkdir -p ~/newroot/{bin,lib,lib64}
 # chroot ~/newroot /bin/bash
@@ -163,10 +177,10 @@ x: execute
 (term1)# echo $$
 -> 18795
 (term2)# ps -ef | grep 18795
+```   
 
-
-### namespaces 실습
-
+#### namespaces 실습  
+```  
 # unshare --fork --pid --mount-proc=/proc /bin/sh
 # ps
 # exit
@@ -244,9 +258,10 @@ x: execute
 # ping 2.2.2.2
 # ip netns exec guestnet ping 2.2.2.1
 ================================================
+```
 
-### cgroup 실습
-
+#### cgroup 실습  
+```  
 # apt-get update
 # apt-get install -y gcc
 # nano a.c
@@ -279,9 +294,10 @@ ctrl+x > y > enter
 # kill -9 $(pgrep b.out)
 
 =====================================================
+```  
 
-### overlayFS
-
+#### overlayFS  
+```  
 # cd ~
 # mkdir overlayfs; cd overlayfs
 # mkdir container image1 image2 work merge
@@ -302,8 +318,10 @@ ctrl+x > y > enter
 # reboot
 
 =====================================================
+```
 
-### docker installation
+#### docker installation  
+```  
 1) # apt-get update
 
 2) # apt-get install -y  apt-transport-https ca-certificates curl software-properties-common
@@ -429,9 +447,10 @@ ctrl+c
 # docker diff test01
 
 =================================================
+```   
 
-### docker volume
-
+#### docker volume  
+```  
 # docker run -itd --name test00 centos
 # docker ps
 # docker inspect test00
@@ -491,9 +510,10 @@ image layer(ro)
 # docker inspect data_container | grep -A 10 "Mounts"
 
 =========================================================
+```
 
-### docker network
-
+#### docker network  
+```  
 # docker inspect yumi01 | grep -i ipa
 # docker inspect test2 | grep -i ipa
 # ip a
@@ -518,9 +538,10 @@ image layer(ro)
 (교육 장비의 web browser) 192.168.137.101:8080
 
 =======================================================
+```
 
-### docker image
-
+#### docker image  
+```  
 # docker image ls
 # docker images
 # docker search ubuntu
@@ -592,9 +613,9 @@ create repository -> repository name: 20220511web
 # docker inspect ccamm1/20220420web:v2 | grep yumi
 
 ========================================================
-
-### docker image build
-
+```  
+#### docker image build  
+```  
 # git clone https://github.com/boulde/SDS.git
 # ls -al
 # tar -xvzf SDS/labfile_0509.tgz
@@ -657,9 +678,10 @@ create repository -> repository name: 20220511web
 # cd ../../
 
 ====================================================
+```  
 
-### kubernetes installation
-
+#### kubernetes installation  
+```  
 2. kubelet 의 적절한 동작을 위해서 swap을 사용하지 않는다.
 
 # swapon && cat /etc/fstab 
@@ -767,8 +789,6 @@ hostname변경:
 ex) hostnamectl set-hostname worker1
 # hostname
 
-
-
 7. (master)# kubeadm init
 
 8. token 저장
@@ -798,9 +818,10 @@ ctrl+x > y > enter
 # watch -n 1 kubectl get pods -n kube-system
 ctrl + c
 # kubectl get node
+```
 
-### node join
-
+#### node join   
+```  
 # cd ~
 # scp token.sh 192.168.137.102:/root/token.sh
 # scp token.sh 192.168.137.103:/root/token.sh
@@ -846,9 +867,10 @@ ctrl+x > y > enter
 # kubectl config set-context kubernetes-admin@kubernetes --namespace=""
 
 ==============================================================
+```   
 
-### pod
-
+#### pod  
+```  
 # cd labfile/pod/
 # ls -al
 # cat app.yaml
@@ -900,9 +922,10 @@ ctrl+x > y > enter
 (worker1)# systemctl restart kubelet
 
 ================================================
+```   
 
-### label & selector
-
+#### label & selector  
+```  
 # cd ../label
 # cat label01.yaml
 # kubectl apply -f label01.yaml -f label02.yaml -f label03.yaml -f label04.yaml
@@ -932,9 +955,10 @@ ctrl+x > y > enter
 
 
 =============================================================
+```  
 
-### controller
-
+#### controller  
+```
 # kubectl delete pod --all
 # watch -n 1 kubectl get rs,pod -o wide
 # cd ../controller/replicaset
@@ -999,9 +1023,10 @@ ctrl+x > y > enter
 # kubectl delete pod --all
 
 ===============================================================
+```   
 
-### service
-
+#### service   
+```  
 # cd ../../service/
 # kubectl delete daemonset daemonset-app
 # watch -n 1 kubectl get svc,deploy,pod -o wide
@@ -1027,9 +1052,10 @@ ctrl+x > y > enter
 (web browser) 192.168.137.200
 
 ================================================
+```  
 
-### application deployment strategies
-
+#### application deployment strategies   
+```  
 # cd ../controller/deployment/deploy_blue_green/
 # kubectl delete deployment hostname-server
 # kubectl delete svc loadbalancer-hostname-service
@@ -1052,9 +1078,10 @@ i(insert) > release: beta => release: stable > esc > :wq!
 (cmd)# curl -s 192.168.137.101:30880 | findstr Deployment
 
 =======================================================
+```   
 
-### volume
-
+#### volume   
+```
 # cd ../../../volume/
 # kubectl delete svc blue-canary-svc
 # kubectl delete deployment --all
@@ -1110,9 +1137,4 @@ i(insert) > release: beta => release: stable > esc > :wq!
 # kubectl apply -f autoscaling.yaml
 # watch -n 1 kubectl get hpa,pod -o wide
 # kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
-
-
-
-
-
-
+```  
