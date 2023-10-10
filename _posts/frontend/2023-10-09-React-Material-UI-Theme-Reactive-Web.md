@@ -347,7 +347,7 @@ const Icons = styled(Box)(({ theme }) => ({
         display: "flex"
     }
 }));
-const UserBox = styled(Box)(({ theme }) => ({
+const UserBox = styled(Box)(({ theme }) => ({
     display: "flex",
     gap: "10px",
     alignItems: "center",
@@ -366,13 +366,12 @@ const Navbar = () => {
             </StyledToolbar>
         </AppBar>
     )
-}
-![image](https://github.com/lucky-sugar-park/lucky-sugar-park.github.io/assets/135287235/9aa165da-df90-4356-b4c0-bf11b6b075cc)
-   
+}   
 ```
 
 #### Outro
-- 본 글에서 참조한 소스코드는 [여기](https://www.github.com)를 통해서 git으로 clone 할 수 있다   
+- 본 글에서 참조한 소스코드는 [여기](https://github.com/lucky-sugar-park/examples-reactive-web)를 통해서 git으로 clone 할 수 있다
+- ```git clone https://github.com/lucky-sugar-park/examples-reactive-web.git```  
 - Material-UI만을 사용하고서도, 거의 왠만한 웹 화면을 구성하는 데에 부족함이 없었으며, 특히 Theme와 Reactive web 방식의 UI를 아주 손쉽게 구현할 수 있었다.
 - Material-UI에서 제공하지 않는 Widget이 있다면 styled web hook을 통해서 Custom Component를 확보할 수 있고,
 - 일관된 theme 적용을 통해서 기존 Material-UI에서 제공하는 Widget과 같은 수준의 손쉬움을 확보할 수 있었다.
