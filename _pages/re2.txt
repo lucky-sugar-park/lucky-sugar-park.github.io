@@ -1,0 +1,88 @@
+IT INFRA Technology
+ You can build CI/CD (Continuous Integration/Continuous Deployment) using Kubernetes Cluster and open source
+ You can install and use Jenkins and ArgoCD on Kubernetes
+ You can install and operate Istio, the main sub-project of Kubernetes. In particular, you can perform authentication management, which is an important function of service mesh, using Istio + Oauth-proxy + Keycloak
+ You are good at handling databases (MySQL, Maria DB, PostgreSQL) (at the administrator level) (Of course, there are quite a few commands that I have forgotten over time, but you can Google the ones you don't know)
+ You are good at handling Linux servers (not at the administrator level, but you have the knowledge and experience necessary for development or architecture)
+ You have high-level knowledge and experience in networks (basic knowledge of networks is essential when building a system in the cloud)
+
+Career
+Establishing Digital Twin Architecture – Samsung SDS
+ December 2023 ~ Present
+ Established a digital twin platform architecture for the manufacturing environment of Samsung SDS customers and planned an implementation road map
+ Provided real-time simulation services using numerical analysis/Deep Learning models in the customer's manufacturing facilities, processes, and utility environments, and presented a technology structure that can monitor the simulation status in real time through a 3D model (USD-Universal Scene Description).
+ As for the infrastructure technology structure, Kubernetes (K8S), a representative PasS platform enabler, and Kubeflow, which provides MLOps, were applied, thereby improving availability and reducing costs.
+
+Establishment of Integrated Construction Management System Architecture – Samsung SDS
+ June 2023 ~ November 2023
+ Established and implemented the integrated construction management system architecture for Samsung SDS customers
+ Designed networks, servers, CDNs, integrated SSO authentication, micro services, micro frontends, etc. so that they can be installed and serviced on Samsung SDS's cloud, SCP (Samsung Cloud Platform)
+ In particular, pilot-built and verified a user authentication system using K8S + Istio + Oauth2-Proxy + Keycoak
+ In addition, implemented and verified a micro frontend using a combination of React + Next + Nginx + Minio (for some tasks) and provided the skeleton of the frontend source code.
+
+Development of 3dx drawing conversion service – Samsung SDS
+ November 2022 ~ May 2023
+ This is a system that converts various types of CAD drawings into 3D Streaming services
+ It is implemented to support SaaS-style services by running within a Kubernetes Cluster
+ It consists of a Worker process that is in charge of the actual conversion and an Orchestrator that manages conversion requests while creating/deleting/managing Workers in the form of K8S PODs
+ Applied technologies such as Docker, Kubernetes, Kafka, Kafka connect, Springboot, Springframework, jenkins, ArgoCD, and Nexus Repository.
+
+Strengthening solution competitiveness/Samsung SDS
+ February 2021 ~ December 2021
+ As a Chief Architect, I identified areas for improvement and proposed and designed architectures to improve the quality of various SW products in the company.
+ Identified chronic problems that manufacturing sites are suffering from, and proposed and applied solutions to solve them (using IT technology) (Big data web chart, Big data web grid, etc.)
+ In particular, for web charts and grids, due to the nature of manufacturing (rendering millions of data on the client), existing commercial products were not satisfactory, but I solved the problem by proposing architectures such as switching to SSR charts and utilizing Indexed DB.
+
+WCS System Development/Imarket Korea
+ July 2018 ~ March 2019
+ We built a warehouse control system in the new warehouse of iMarketKorea (Dongtan)
+ It is a system that controls goods up to the delivery line by linking with the main picking system, the German Schaefer system, the domestic DPS system (Digital Picking System), and the Japanese sorter company Hokusho system
+ Since most field logistics systems are controlled based on PLC, WCS exchanged necessary data through communication with the PLC
+ Since the communication method of PLC varies depending on the manufacturer, it must be tailored to the PLC manufacturer, but if the design is well done by separating the interface and implementation, the existing code changes due to the change in PLC manufacturer can be minimized.
+
+The PLC I experienced in this project was a Mitsubishi product, and only the designed IFs were applied
+ We applied technologies such as React.js, Three.js, Netty, Springboot, MySQL, and self-developed application framework.
+
+Facility Prediction Management System
+ January 2018 ~ June 2018
+ This is a system that provides a status prediction service for semiconductor manufacturing facilities of Samsung SDS customers.
+ It collects sensing information from all processes of various facilities and provides a service that predicts the status by training a machine learning model based on the collected information.
+ In order to express large amounts of data through web UI, open sources such as echart and a machine learning model using Tensorflow were adopted, and Cassandra was adopted for big data storage and processing.
+
+VA4S (Vidio Analysis for Samsung SDS) Development/Samsung SDS
+ April 2013 ~ December 2016
+ It is a system that analyzes CCTV to detect security-related events, visually informs the location, and generates an alarm.
+ I participated as a PM + architect + core developer in charge of the development, and there were about 40 developers.
+ The main functions were unit event detection (falling, jumping, boundary violation, specific vehicle number, etc.), complex event detection (complex event that links unit events in the form of a flow), and object/event search.
+ The objects that can be detected were divided into three categories: people/vehicles/unidentified. In the case of people, it supported face recognition and search by clothing color, and all UIs were based on maps.
+ The main technologies used were face recognition library, Google Map API, Hbase (NoSQL DB), Hadoop's MapReduce, MariaDB, etc.
+ In particular, it was very exciting to register hundreds of millions of human faces from more than 1,000 CCTVs and show search results within seconds when searching for a specific face (How to use NoSQL DB It was an opportunity to gain insight into whether it was efficient)
+
+Non-ERP generation system for shipbuilding
+ January 2013 ~ March 2013
+ This is a project to build a next-generation system system for the shipbuilding sector of a Samsung SDS client company, Non-ERP (including production execution).
+ Over the course of approximately 3 months, we established software architecture for all Non-ERP sectors (including systems such as MES, PLM, logistics system, GIS system, and supply chain system).
+
+Next-generation MES system design consulting, etc./Samsung Electronics
+ January 2010 ~ December 2012
+ Participated as PL in architecture section and performed design consulting for SA/TA/DA section
+ At that time, the topic was introduction of 300mm wafer and real-time analysis/processing of big data due to it, and we had a lot of discussions on how to solve this problem
+ I even remember holding a 2-day workshop with Professor David Galen of Carnegie Mellon, a master of software architecture
+ At that time, we focused on commercial-based memory DBMS for database and ESPER, CEP (Complex Event Processing) open source for real-time processing
+ The system was so large and had so many components that it took a lot of time and headache to design the future model
+ During this period, we worked together on various sub-projects related to building virtual measurement systems, etc.
+
+Next-generation NEIS system consulting/KERIS (Korea Education and Research Information Service)
+ January 2009 ~ January 2010
+ It was the largest-scale work in my life (architecture design of a system worth about 200 billion won)
+ I remember burning all night for a long time, such as the project period of 6 months, pre-preparation for 2 months, and after-service for 4 months (the reason it took so long was because there were modifications every time and endless reviews were conducted)
+ I participated as a PL in the architecture section and discussed the architecture of the AA/SA/TA/DA sections with my team members
+ One thing I remember is that the topics at the time were the removal of Active-X and RESTful API, but I didn't think that RESTful API would become a technology standard like it is now
+ In relation to the above, I don't think I would have thought that React.js or Angular.js would make JavaScript-based SPA the trend like it is now.
+ The main technology used was QAW (Quality Attribute Worksop), and all of my knowledge about application development and IT was mobilized
+
+Other/Other
+ ~ December 2008
+ Carried out large and small projects in other public sectors, defense sectors, manufacturing sectors, etc.
+ Participated mainly as a software architect and performed tasks such as core module coding, development standard establishment, development environment establishment, and architecture establishment/implementation.
+
