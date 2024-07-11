@@ -1,5 +1,67 @@
 Career
 I have design and developed various size of systems as a software architect and software developer during most of my career.
 
+Career
+====
+Most of my time (as an architect and developer in the SI/IT field) was spent designing and implementing architectures of large and small systems. In the process, I naturally gained a wide range of experience and knowledge from applications to IT infrastructure, UI to DBMS.
+
+SW Principles and Philosophy
+Implementing a good architecture is essential for building a good system. This will lead to improving the business agility of the company. This is my conclusion based on my field experience as a Chief Architect (in charge of architecture in all areas including IT Infra, App development, and Data) for many years.
+Close communication between stakeholders is essential for building a good architecture. The larger the system, the more the architecture should never be determined by one person alone, and it cannot be. No matter how excellent the Big Picture concept is, if the developer does not follow it (due to lack of time, etc.), it will be useless.
+I believe that a leader should be able to provide the right direction and draw out the voluntary participation and capabilities of the members. In my experience (having led dozens of development organizations), the most effective leadership is “leading by example.” Based on communication, I was able to elicit the voluntary participation of the members (along with increased confidence that they can do it) by solving the most difficult technical challenges first.
+There is a classic saying in SW engineering called “Divide and Conquer.” “Split well and combine well” I am confident that if you do this well, you can solve any difficult problem. In this process, the programming language is not very important. (Language) You can learn it if you need it (Rather, learning ability is more important)
+
+Changes and adaptations to the IT paradigm
+There have been several changes in the IT paradigm over the past 20 years. There was a change in application development technology/methodology due to the emergence of web technology, and the change we are currently experiencing due to the cloud (which is completely changing the IT environment of the company). During this process, I have seen many engineers give up their technology and move to other fields, saying, “I’ve come this far.”
+
+Personally, I was able to adapt to the changes due to web technology and other small changes that followed without difficulty, but the changes due to the development of cloud/AI technology (because the scope of the changes is so great) took a considerable amount of time to adapt and learn. (I was able to adapt much faster than others thanks to my previous knowledge) but I had to start from almost zero base with my previous experience/knowledge/technology.
+
+Due to the development of IT technology, these changes will accelerate even more. However, the purpose of the IT system is to improve the business capabilities of the company, and the architecture and source code must evolve in a way that enhances the business agility of the company.
+
+from now on
+(It's not a grandiose goal) I'm trying to become a master in one field and leave my mark as an architect and software developer, and I have a goal to achieve it. I've also received a lot of help through open source, so I want to contribute to the world through open source whenever I have the chance.
+
+Key technology (capability)
+
+Learning ability
+ It is the most outstanding skill I have
+ I can acquire and internalize (most) of the development/IT knowledge I need by surfing the web. I avoid IT skills training at work as much as possible. This is because I can acquire the skills in “a few hours to a few days by surfing the web” and it is much faster than getting training.
+
+Open sources
+ There are many open sources, and I think that you can apply them after learning (if necessary), and I am actively using them in my work.
+ It covers Springframework, FastAPI, Kafka, Kafka connect, Rabit MQ, Elastic search, Nifi, Kubernetes/Istio, etc., Kubeflow, Jboss, MySQL, PostgreSQL, Next, React, Material-UI, etc.
+
+Algorithm
+ I can solve difficult problems with excellent performance, and I am constantly striving for higher capabilities. 
+ I am at the Platinum-1 level on the problem-solving site Baekjoon (I have solved about 700 to 800 problems of various difficulty levels on various sites)
+
+Architecture
+ I have extensive experience in software architecture, technology architecture (IT infrastructure), and data architecture.
+ The main target quality attributes are “availability”, “security”, “ease of use”, “ease of test”, “performance”, and “ease of maintenance”, and I have excellent ability in scenario-based architecture design and implementation targeting these main quality attributes.
+ When establishing an architecture, I attach importance to communication with stakeholders, and in particular, I fully utilize the knowledge of business managers.
+
+Manufacturing/Production Field
+ I have a lot of experience and knowledge in MES and facility control through large and small projects at production plants such as Samsung Electronics, Samsung Electric, and Samsung Display.
+ I am familiar with the concepts and systems of work instructions (ADS), production execution (MOS), logistics control (MCS), facility engineering (EES), yield management (YMS), quality management (QMS), APC, and SPC, and I have design/implementation capabilities.
+ Regarding facility control (Tool Control), I can link with PLCs from various manufacturers (currently, I only have experience linking with Mitsubishi PLC). (However, PLC manufacturer documents and sample codes are required.) In particular, by generalizing the connection with the facility, we can implement TC (if necessary), which is a concept that can implement IF in all facilities (only with settings, without code)
+ I am currently working on TC and PLC emulator (in my spare time) as a personal project, and when it is completed to a certain extent, I plan to open source it through GIT
+
+When this project is completed, it will be possible to test the connection through the emulator even before installing the facility, and it is expected that there will be a drastic reduction in time and cost when building the MES system by being able to exchange data between MES and the facility (only with settings, without additional coding).
+
+FRONTEND TECHNOLOGY
+ I am good at using React.js and am familiar with implementing web UI using CSR/SSR method using Next.js
+ I am very good at using Material-UI, an open source NPM library, and can develop high-level UI without a separate web designer (Vue.js is at a Hands-on level, but can be used in a day or two)
+ I can implement Micro frontend architecture using Module Federation technology of Webpack 5
+ I can build CDN service based on Micro frontend architecture by applying open source Nginx and Minio
+ I am doing a lot of research on Frontend design patterns and Coding Conventions based on React.js + Next.js + Webpack 5 Module Federation.
+
+BACKEND TECHNOLOGY
+ (There is no specific programming language for backend) Java, Python, C++, C# languages ​​can be used (Java and Python languages ​​are mainly used recently)
+ Spring Framework and Spring Boot, famous Java language frameworks, are used at an expert level
+ You can create/delete/monitor Kubernetes Resources in conjunction with Kubernetes Cluster (a technology that enables PaaS platforms) in Java language.  Python can develop REST APIs based on FastAPI (no Django experience) You can implement a multi-threading environment in combination with Uvicorn and Gunicorn.
+ In Google's Colabs (https://colabs.research.google.com) environment, you can analyze, operate, and apply various AI models that have already been created.  The Python language is "really lovely", and I especially like the Decorator (@) concept. In Java, I was able to easily solve IoC (Inversion of Control) and injection problems that would have been really difficult without the Spring Framework by utilizing Decorator. I have experience applying Decorator in the log and DB Transaction processing parts.
+ I have experience developing a face recognition-based “access control system” in conjunction with the ACS system of “Renelle,” a US speedgate company, in C++ language. It’s been a few years, but if I recall correctly, I think it was possible to operate up to 4 CCTVs with a single laptop. The libraries I mainly used were OpenCV and a self-developed face recognition module.  The backend part is an area where software design is particularly important (regardless of language). This is because most of the quality attributes that stakeholders require when looking at a system are in the backend part, and
+There are many design patterns related to this, and I can apply most of the design patterns that have been popular since the early 2000s to my work very skillfully.
+
 
 
