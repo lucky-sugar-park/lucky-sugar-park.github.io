@@ -10,15 +10,19 @@ tags:
   - Nextjs
 ---
 
-0. 현행 화면을 분석해서, 어느 정도의 공통 컴포넌트가 필요한지 여부,  
-1. Frontend + Backend를 하나의 서비스 개발 팀으로 묶는 개념의 개발조직 필요     
-2. directory structure  (assets, components, views ...)  
-3. component, view, widget, page
-4. container, views, card, 
-5. configuration ...
-6. I28N  
-7. SSR, CSR ...
-8. architecture
-9. environment variables
-10. naming rule (directory structure, file, variable, component, widget ... camel case, snake case, kabap case ...)
-11. common component, utils functions, common widgets etc ...  
+0. 현행 화면을 분석해서 => 화면 개수 파악, 공통 컴포넌트 파악, 마이크로 프론트엔드 묶음 파악
+1. 프론트엔드 아키텍처 정의,  코딩 컨벤션 정의, CICD 환경 정의  
+2. Frontend + Backend를 하나의 서비스 개발 팀으로 묶는 개념의 개발조직 필요  
+3. 최종적으로 현행 개발자 대상의 코딩 컨벤션 교육
+
+
+1. directory structure  (assets, components, views ...)  
+2. component, view, widget, page
+3. container, views, card, 
+4. configuration ...
+5. I28N  
+6. SSR, CSR ...
+7. architecture
+8. environment variables
+9. naming rule (directory structure, file, variable, component, widget ... camel case, snake case, kabap case ...)
+10. common component, utils functions, common widgets etc ...  
