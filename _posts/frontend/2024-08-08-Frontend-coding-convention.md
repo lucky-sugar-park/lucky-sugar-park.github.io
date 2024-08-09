@@ -15,7 +15,12 @@ tags:
 2. 컨테이너 컴포넌트에서 다른 microfrontend 컴포넌트 / 서비스 모듈을 실시간으로 binding 하는 방식 => 아마도  
 3. Frontend + Backend를 하나의 서비스 개발 팀으로 묶는 개념의 개발조직 필요  
 4. 최종적으로 현행 개발자 대상의 코딩 컨벤션 교육
-5. Migration 방안  
+5. Migration 방안
+
+---
+업무별 frontend/backend별 stage/production별 빌드 파이프라인을 구성함  
+
+
 
 ---
 1. directory structure  (assets, components, views ...)  
