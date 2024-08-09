@@ -14,8 +14,9 @@ tags:
 1. 프론트엔드 아키텍처 정의,  코딩 컨벤션 정의, CICD 환경 정의  
 2. Frontend + Backend를 하나의 서비스 개발 팀으로 묶는 개념의 개발조직 필요  
 3. 최종적으로 현행 개발자 대상의 코딩 컨벤션 교육
+4. Migration 방안  
 
-
+---
 1. directory structure  (assets, components, views ...)  
 2. component, view, widget, page
 3. container, views, card, 
