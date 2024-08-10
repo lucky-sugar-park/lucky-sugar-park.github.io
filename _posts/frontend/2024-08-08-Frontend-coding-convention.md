@@ -39,18 +39,28 @@ CICD 구성도
 
 ![image](https://github.com/user-attachments/assets/93a1df38-00ed-4fe3-b588-d2e3622e4420)   
 
- ![image](https://github.com/user-attachments/assets/6f426034-5272-44a3-b70b-0b9143abfefa)   
+![image](https://github.com/user-attachments/assets/6f426034-5272-44a3-b70b-0b9143abfefa)   
 
 
-
-### Coding Convention 
-1. directory structure  (assets, components, views ...)  
-2. component, view, widget, page
-3. container, views, card, 
-4. configuration ...
-5. I28N  
-6. SSR, CSR ...
-7. architecture
-8. environment variables
-9. naming rule (directory structure, file, variable, component, widget ... camel case, snake case, kabap case ...)
-10. common component, utils functions, common widgets etc ...  
+---
+### Coding Convention  (React 권장 코딩 컨벤션을 수용해야 함)
+특정 조직 / 시스템에 맞는 코딩 컨벤션이 필요함. 코딩 컨벤션에는 다음과 같은 내용들이 포함되어 있어야 함    
+1. directory structure  (assets, utils, components )
+  - 디레토리 이름은 kebap case를 기준으로 함
+  - 조직에 최적화된 (문화 등 고려) 디렉토리 정의가 중요함
+2. 파일 이름  
+  - Component 파일 / Page 파일 / View 파일 / widget 파일 ...  : 파스칼 케이스
+  - function 파일 등 : uitls function 등, 케밥 케이스
+3. 파일내 이름 들
+  - 클래스 이름: 파스칼 케이스
+  - 변수 이름: 카멜 케이스
+  - 상수 이름: 스네이크 케이스  
+4. 용어 표준화
+  - component, view, widget, page, card, container 등의 용어 정의  
+5. directory 내 index.js를 반드시 작성할 것 
+6. configuration
+  - 각종 설정 등을 어떻게 할 것인지에 대한 표준화 필요
+  - 각종 환경 변수 ...
+7. 다국어 지원   
+8. SSR, CSR ...
+9. SSE (서버로부터의 이벤트 처리 방안), 내부 메시지 통신 방안 (redux 적용)
