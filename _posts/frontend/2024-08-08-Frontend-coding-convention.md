@@ -20,6 +20,25 @@ tags:
 ---
 업무별 frontend/backend별 stage/production별 빌드 파이프라인을 구성함  
 
+![image](https://github.com/user-attachments/assets/646f10e7-8871-4bf1-baa8-092bccf8699a)   
+
+CICD 구성도  
+
+![image](https://github.com/user-attachments/assets/757849f8-4597-4599-b993-9b5fb1ca003c)
+
+개발조직 구성방안   
+
+![image](https://github.com/user-attachments/assets/a42091a4-dcba-4c2e-bd83-dd3a4cffab59)
+
+
+마이크로 프론트앤드 개념  
+
+![image](https://github.com/user-attachments/assets/41f44cdf-b740-468d-8924-db32ad046294)  
+
+![image](https://github.com/user-attachments/assets/93a1df38-00ed-4fe3-b588-d2e3622e4420)   
+
+ ![image](https://github.com/user-attachments/assets/6f426034-5272-44a3-b70b-0b9143abfefa)   
+
 
 
 ---
