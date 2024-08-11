@@ -107,3 +107,30 @@ CICD 구성도
 -      -- src -- framework -- theme
 -      -- src -- framework -- templates              
 ```
+
+### 기본 룰
+1. 하나의 파일에는 하나의 컴포넌트만 포함시킴
+2. 항상 JSX 문법을 따름
+3. React functional component와 class component만 사용함
+
+### Mixins 는 사용하지 않는다  
+1. 대신에 webhook 또는 각종 유용한 디자인 패턴을 적용한다
+
+### 명명규칙  
+1. 확장자: React component 파일의 확장자는 반드시 jsx를 사용함
+2. 파일이름: PascalCase를 적용함. 예), ReservationCard.jsx
+   - 다만, utils 성격의 함수가 있는 파일의 이름은 kebap-case를 적용함
+3. 참조이름: React component에는 PascalCase를 사용하고, 인스턴스에는 camelCase를 사용함
+```
+// bad
+import reservationCard from './ReservationCard';
+
+// good
+import ReservationCard from './ReservationCard';
+
+// bad
+const ReservationItem = <ReservationCard />;
+
+// good
+const reservationItem = <ReservationCard />;
+```
