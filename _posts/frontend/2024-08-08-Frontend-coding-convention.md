@@ -41,6 +41,9 @@ CICD 구성도
 
 ![image](https://github.com/user-attachments/assets/6f426034-5272-44a3-b70b-0b9143abfefa)   
 
+사용하는 개념  
+
+![image](https://github.com/user-attachments/assets/a3c1313a-6a45-4027-8ced-9bd67bec30bf)  
 
 ---
 ### Coding Convention  (React 권장 코딩 컨벤션을 수용해야 함)
@@ -65,3 +68,38 @@ CICD 구성도
 7. 다국어 지원   
 8. SSR, CSR ...
 9. SSE (서버로부터의 이벤트 처리 방안), 내부 메시지 통신 방안 (redux 적용)
+
+---
+### 컴포넌트 구분
+1. Automic 수준 : mui에서 제공하는과 같은 automic 수준의 각종 ui 컴포넌트들
+2. Widget : Automic + Automic, Widget + Automic 수준 (화면을 구성하는 composite automic component 개념)
+3. View: 화면을 구성하는 (실제 업무가 포함되는 단위의) 컴포넌트 (Widget, Automic, View로 구성될 수 있음)
+4. Page: 실제 업무 화면  
+5. Template: Layout 개념
+
+---
+### 디렉토리 구분  
+```
+- Root -- public -- assets   
+-               -- index.html
+- Root -- index.js
+-      -- .env, .env.local, .env.development, .env.test, .env.production
+- Root -- src 
+-      -- src -- assets
+-      -- src -- assets -- images
+-      -- src -- assets -- css  
+-      -- src -- configs
+-      -- src -- components
+-      -- src -- components -- widgets
+-      -- src -- components -- views
+-      -- src -- pages
+-      -- src -- store  
+-      -- src -- utils
+-      -- src -- framework
+-      -- src -- framework -- routes
+-      -- src -- framework -- messages
+-      -- src -- framework -- messages -- sse
+-      -- src -- framework -- messages -- internal  
+-      -- src -- framework -- theme
+-      -- src -- framework -- templates              
+```
