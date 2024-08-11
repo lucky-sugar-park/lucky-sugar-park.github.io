@@ -83,7 +83,10 @@ CICD 구성도
 - Root -- public -- assets   
 -               -- index.html
 - Root -- index.js
--      -- .env, .env.local, .env.development, .env.test, .env.production
+-      -- .env, .env.local, .env.development, .env.development.local, .env.test, .env.test.local, .env.production, .env.production.local,
+-      -- npm run start시 우선순위 : .env.development.local > .env.local > .env.development > .env
+-      -- npm run build시 우선순위 : .env.production.local > .env.local > .env.production > .env
+-      -- npm run test시  우선순위 : .env.test.local > .env.test > .env  
 - Root -- src 
 -      -- src -- assets
 -      -- src -- assets -- images
