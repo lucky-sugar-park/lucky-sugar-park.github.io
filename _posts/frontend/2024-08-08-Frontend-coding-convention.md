@@ -20,7 +20,7 @@ tags:
 1. 컨테이너 컴포넌트에서 다른 microfrontend 컴포넌트 / 서비스 모듈을 실시간으로 binding 하는 방식 => 아마도  
 2. Frontend + Backend를 하나의 서비스 개발 팀으로 묶는 개념의 개발조직 필요
 3. Microfrontend의 유형
-   - 단일 SPA 어플리케이션
+   - 단일 SPA 어플리케이션 (이 방식의 경우 멀티 라이팅 정책이 될 확률이 높음)  
    - 단일 SPA Parcel
    - 유틸리티 모듈  
 
