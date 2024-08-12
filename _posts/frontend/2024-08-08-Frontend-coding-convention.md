@@ -134,3 +134,14 @@ const ReservationItem = <ReservationCard />;
 // good
 const reservationItem = <ReservationCard />;
 ```
+4. 컴포넌트 이름: 파일 이름과 컴포넌트 이름을 일치 시킴. 단, 디렉토리 root 컴포넌트는 index.js로 함
+```
+// bad
+import Footer from './Footer/Footer';
+
+// bad
+import Footer from './Footer/index';
+
+// good
+import Footer from './Footer';
+```
