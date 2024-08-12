@@ -18,7 +18,10 @@ tags:
 
 ### 고려사항
 1. 컨테이너 컴포넌트에서 다른 microfrontend 컴포넌트 / 서비스 모듈을 실시간으로 binding 하는 방식 => 아마도  
-2. Frontend + Backend를 하나의 서비스 개발 팀으로 묶는 개념의 개발조직 필요  
+2. Frontend + Backend를 하나의 서비스 개발 팀으로 묶는 개념의 개발조직 필요
+
+### 참고
+https://survey.stackoverflow.co/2024/technology#most-popular-technologies
 
 ---
 업무별 frontend/backend별 stage/production별 빌드 파이프라인을 구성함  
