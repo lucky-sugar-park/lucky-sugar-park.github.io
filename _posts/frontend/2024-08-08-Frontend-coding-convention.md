@@ -27,6 +27,8 @@ tags:
 ### 참고  
 [2024 stackoverflow survey](https://survey.stackoverflow.co/2024/technology#most-popular-technologies)  
 
+- [마이크로 프런트앤드 안티패턴](https://dev.to/florianrappl/top-10-micro-frontend-anti-patterns-3809)
+  
 
 ---
 업무별 frontend/backend별 stage/production별 빌드 파이프라인을 구성함  
