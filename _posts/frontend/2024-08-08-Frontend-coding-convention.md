@@ -1,5 +1,5 @@
 ---
-title: "Coding conventions for micro frontend with reactjs and nextjs"  
+title: "temp-coding-convention"  
 last_modified_at: 2024-08-08T18:40:10-05:00
 categories:
   - Blog
