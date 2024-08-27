@@ -82,3 +82,107 @@ tags:
   </tbody>
 </table>
 
+### Webpack 5 적용  
+Micro frontend 아키텍처를 적용하는 가장 쉽고, 일반적인 방법은 Webpack 5의 Module Federation을 적용하는 것이다.  
+Angularjs 1.x에서 webpack 5 적용을 위한 설정은 아래 코드를 참조한다.  
+
+```
+// webpack.config.js
+onst path = require("path");
+const webpack = require('webpack');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+
+const deps = require("./package.json").dependencies;
+
+module.exports = {
+    // angularjs 1.x 프로젝트에서의 entry 
+    entry: './src/app.module.js',
+    output: {
+        // 이 프로젝트인 Angularjs 1.x로 만들어진 Microfrontend를 다른 프로젝트에서 참조할 때에 사용할 Path를 기입
+        // 일반적으로는 CDN 또는 minio와 같은 Bucket에 Upload 하고, 그 주소를 기입한다  
+        // publicPath: "http://localhost:3000/",
+        path: __dirname + "/dist",
+        filename: 'app.bundle.js',
+    },
+    resolve: {
+      extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+    },  
+    devServer: {
+      port: 3000,
+      // webpack 개발서버에서 라우팅 경로를 처리할 때의 옵션
+      // 이 옵션을 true로 하지 않으면, 웹 브라우저에서 직접 URL을 입력하면 404 에러가 난다  
+      historyApiFallback: true,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.m?js/,
+          type: "javascript/auto",
+          resolve: {
+            fullySpecified: false,
+          },
+        },
+        {
+          test: /\.(css|s[ac]ss)$/i,
+          use: ["style-loader", "css-loader", "postcss-loader"],
+        },
+        {
+          test: /\.(ts|tsx|js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+          },
+        },
+        {
+          test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+          use: {
+            loader: "file-loader"
+          }
+        },
+        {
+          test: /\.(htm|html)$/,
+          exclude: [/node_modules/, require.resolve('./index.html')],
+          use: {
+            loader: "html-loader",
+            options: {
+              esModule: false,
+            },
+          }
+        }
+      ],
+    },
+    plugins: [
+      new ModuleFederationPlugin({
+        // 다른 프로젝트에서 이 마이크로 프론트앤드를 참조할 때의 microfrontend 모듈이름
+        name: "ng_mfe_expose",
+        filename: "remoteEntry.js",
+        // 다른 곳에 배포된 마이크로 프론트앤드를 재사용하기 위해서 정의해 주어야 함
+        remotes: {
+          // http://127.0.0.1:9000/pilot/common/remoteEntry.js에서 common이라는 이름의 모듈을 common 이라는 이름으로 정의함
+          "common": "common@http://127.0.0.1:9000/pilot/common/remoteEntry.js",
+        },
+        // 외부에 특정 마이크로 프론트앤드를 노출하고 싶을 때 기술함
+        // ng_mfe_expose라는 모듈이름으로 "./src/modules/mfe-expose/MfeExposeComponent.js"를 ./MfeAngularComponent이라는 이름으로 노출함 (접속하는 URL은 output.publicPath의 값임)  
+        // exposes: {
+        //   "./MfeAngularComponent": "./src/modules/mfe-expose/MfeExposeComponent.js",
+        // },
+        // 모듈을 expose할 때에 포함시킬 라이브러리들 
+        // shared: {
+        //   "angular" : { singleton: true, requiredVersion: deps.angular },
+        //   "angular-route" : { singleton: true, requiredVersion: deps["angular-route"] },
+        //   "angular2react" : { singleton: true, requiredVersion: deps["angular2react"] },
+        //   "ajv": { singleton: true, requiredVersion: deps.ajv },
+        //   "autoprefixer": { singleton: true },
+        //   "@uirouter/angularjs": { singleton: true, requiredVersion: deps["@uirouter/angularjs"]}
+        // },
+      }),
+      new HtmlWebPackPlugin({
+        template: "./index.html",
+        title: "Webpack and Angularjs 1.x application example"
+      }),
+    ],
+}
+```
+
+### 
