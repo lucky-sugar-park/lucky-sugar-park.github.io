@@ -10,20 +10,6 @@ tags:
   - Nextjs
 ---
 
-### 업무진행 순서
-1. 현행 화면을 분석해서 => 화면 개수 파악, 공통 컴포넌트 파악, 마이크로 프론트엔드 묶음 파악
-2. 기타 요구사항 수집
-3. 프론트엔드 아키텍처 정의,  코딩 컨벤션 정의, 프론트앤드 CICD 환경, 점증적 마이그레이션 방안 정의
-4. 현행 개발자 대상 내용 설명 (아키텍처, 코딩컨벤션 등)  
-
-### 고려사항
-1. 컨테이너 컴포넌트에서 다른 microfrontend 컴포넌트 / 서비스 모듈을 실시간으로 binding 하는 방식 => 아마도  
-2. Frontend + Backend를 하나의 서비스 개발 팀으로 묶는 개념의 개발조직 필요
-3. Microfrontend의 유형
-   - 단일 SPA 어플리케이션 (이 방식의 경우 멀티 라이팅 정책이 될 확률이 높음)  
-   - 단일 SPA Parcel
-   - 유틸리티 모듈  
-
 ### 참고  
 [2024 stackoverflow survey](https://survey.stackoverflow.co/2024/technology#most-popular-technologies)  
 
