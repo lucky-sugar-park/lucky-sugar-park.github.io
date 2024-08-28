@@ -10,18 +10,16 @@ tags:
   - Microfrontend integration bewteen reactjs and angularjs
 ---
 
-> 불행하게도 2013년도 ~ 2017년도 사이에 Angularjs 1.x버전으로 개발된 SPA에 제법 있으며,  
-> 시간이 지날 수록 개발자 수급이 어려워지며, 복잡해져서 변경 요구에 대응하기가 점점더 어려워지는 경향이 있다.  
+> 2013년도 ~ 2017년도 사이에 Angularjs 1.x버전으로 개발된 SPA들이 제법 있으며,  
+> 불행하게도 시간이 지날 수록 개발자 수급이 어려워지며, 복잡해져서 변경 요구에 대응하기가 점점더 어려워진다.  
 > 이런 이유 때문에 유지보수가 용이한 React/Vue/Angular 기술 + Micro frontend 아키텍처로 전환하고자 하는 요구가 많이 있다  
 > 하지만 이 작업은 매우 어려운 일이다. 특히 SPA의 규모가 커질 수록 전환작업은 극한으로 어려워질 수 있다.  
-> 특히 Angularjs 1.x는 너무 오래된 기술이기 때문에 최신 기술인 webpack과 관련된 글을 찾기가 쉽지 않은 관계로  
-> 전환작업은 더욱 더 어려워 진다.  
+> 특히 Angularjs 1.x는 너무 오래된 기술이기 때문에, 몇 년 전부터 더 이상 기술 업데이트가 없으며 최신 기술인 webpack과 관련된 사례나 글을 찾기가 쉽지 않은 관계로 전환작업은 더욱 더 어려워 진다.  
 > 기존 Angularjs 1.x 코드를 버리고, 모두 신규 React 컴포넌트로 개발한 후에 Big bang 방식으로 일괄적용 할 수도 있지만  
 > 규모가 크고 Lagacy frontend를 "계속 서비스 + 기능 유지보수"하면서 점증적인 전환을 해야 할 경우 (사실상 대부분의 경우가 여기에 해당될 수 있음)  
 > 전환 작업은 시간도 오래 걸리고 매우 어려워질 수 있다.
 >
-> 이 글에서는 전환시에 고려해야 할 사항들을 짚어보고, 점증적 전환을 위한 절차와 예제를 통해서 두 개의 자바 스크립트 프레임워크간  
-> 통합을 어떻게 하는지를 설명한다  
+> 이 글에서는 전환시에 고려해야 할 사항들을 짚어보고, 점증적 전환을 위한 절차와 예제를 통해서 두 개의 자바 스크립트 프레임워크간 어떻게 통합할지를 고찰한다.  
 
 ## 목차
 1. 전환시 고려사항  
@@ -30,10 +28,15 @@ tags:
 4. Angularjs 1.x와 React간 Microfrontend 통합 예제
 
 ## 전환시 고려사항  
+Legacy Frontend를 유지보수가 용이한 최신 기술의 Frontend로 전환하기 위해서는 다음과 같은 사항들을 고려해야 한다.  
+1. 기존 운영중인 Legacy Frontend에 대해서 (사용자들 서비스 향상을 위해) 지속적인 기능 향상을 제공할 필요가 있는가?
+2. 동일한 기능을 제공하는 Frontend에 대해서 One Source 정책을 유지할 필요가 있는가?
+3. Big bang 방식의 전환 vs 점증적 전환
+4. Legacy Frontend에 대한 업데이트 유지보수 인력이 충분한가?
 
 ## 아키텍처 
 
-## 전환절차  
+## 전환방법  
 
 ## Angularjs 1.x와 React간 Microfrontend 통합   
 전체 소스코드는 [여기](https://github.com/micro-frontend-pilot) 를 참조한다.   
@@ -184,5 +187,8 @@ module.exports = {
     ],
 }
 ```
+### Reactjs와 Angularjs 1.x 간 통합방법
 
-### 
+### Reactjs 에서  Remote Micro Frontend 사용하기
+
+### Angularjs 1.x에서 Remote Micro Frontend 사용하기
